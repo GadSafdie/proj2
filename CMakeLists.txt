@@ -3,4 +3,4 @@ project(proj2)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(proj2 main.cpp FileCacheManager.cpp FileCacheManager.h CacheManager.cpp CacheManager.h Problem.cpp Problem.h Solution.cpp Solution.h main.cpp)
+add_executable(proj2 main.cpp ClientHandler.h CacheManager.h FileCacheManager.cpp FileCacheManager.h CacheManager.cpp Server.h MySerialServer.cpp MySerialServer.h ClientHandler.h MyTestClientHandler.cpp MyTestClientHandler.h Problem.h Problem.cpp Solution.h Solution.cpp Solver.h)

@@ -11,11 +11,9 @@
 
 
 
-class Server
-//for future         : public ClientHandler
-{
+class Server : public ClientHandler{
 
-    public:
+public:
     virtual void open(int port, ClientHandler c)=0;
     virtual void stop()=0;
 };
