@@ -21,8 +21,8 @@ public:
         StringReverser* sr;
         FileCacheManager* fcm;
         MyTestClientHandler* c = new MyTestClientHandler(sr,fcm);
-        MySerialServer mySerialServer;
-        mySerialServer.open(port,c);
+        MySerialServer* mySerialServer = new MySerialServer();
+        mySerialServer->open(port,c);
 
 
     }
