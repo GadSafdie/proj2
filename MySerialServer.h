@@ -10,11 +10,11 @@
 class MySerialServer : public server_side::Server{
 
 public:
-    MySerialServer(){};
+    MySerialServer();
     virtual void open(int port, ClientHandler* c);
     virtual void stop(){};
     static void clientQuque(int newsockfd, ClientHandler* c);
-    virtual void handleClient(int newsockfd){};
+    virtual void handleClient(int newsockfd, int sockfd){};
 
 
 

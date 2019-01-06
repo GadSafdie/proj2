@@ -67,7 +67,6 @@ void MySerialServer::clientQuque(int sockfd, ClientHandler *c) {
             perror("ERROR on accept");
             exit(1);
         }
-
         c->handleClient(newsockfd, sockfd);
 
 
@@ -75,3 +74,5 @@ void MySerialServer::clientQuque(int sockfd, ClientHandler *c) {
 
 
 }
+
+MySerialServer::MySerialServer() {}
