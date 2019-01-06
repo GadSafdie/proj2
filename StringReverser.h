@@ -10,10 +10,11 @@ using namespace std;
 #include "Solver.h"
 
 class StringReverser : public Solver<string,string>{
-    string solve(string p);
+
 
 public:
     StringReverser(){};
+    string solve(string p);
 };
 
 

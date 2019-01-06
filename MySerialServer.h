@@ -8,11 +8,9 @@
 
 #include "Server.h"
 class MySerialServer : public server_side::Server{
-    int port;
 
 public:
-    MySerialServer(int port){
-        port=port;
+    MySerialServer(){
     };
     virtual void open(int port, ClientHandler* c);
     virtual void stop(){};
