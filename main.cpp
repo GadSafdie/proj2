@@ -10,5 +10,6 @@ int main(int argc, char *argv[]) {
     int port = atoi(port1);
     boot::Main* m;
     m->main(port);
-    return 0;
+    while (true){}
+
 }

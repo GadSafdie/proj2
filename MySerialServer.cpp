@@ -19,7 +19,7 @@ using namespace std;
 
 
 void MySerialServer:: open(int port, ClientHandler* c){
-    int sockfd, newsockfd, portno;
+    int sockfd, portno;
     struct sockaddr_in serv_addr;
 
 /* First call to socket() function */
@@ -43,25 +43,26 @@ void MySerialServer:: open(int port, ClientHandler* c){
         perror("ERROR on binding");
         exit(1);
     }
-    thread serverThread(clientQuque, newsockfd, c);
+// This listen() call tells the socket to listen to the incoming connections.
+    // The listen() function places all incoming connection into a backlog queue
+    // until accept() call accepts the connection.
+    // Here, we set the maximum size for the backlog queue to 10.
+    listen(sockfd, 10);
+    thread serverThread(clientQuque, sockfd, c);
     serverThread.detach();
 
 }
 
-void MySerialServer::clientQuque(int newsockfd, ClientHandler* c){
+void MySerialServer::clientQuque(int sockfd, ClientHandler* c){
 while (true){
     int clilen;
+    int newsockfd;
     struct sockaddr_in cli_addr;
-    /* Now start listening for the clients, here process will
-   * go in sleep mode and will wait for the incoming connection
-*/
 
-    listen(newsockfd, 5);
     clilen = sizeof(cli_addr);
 
 /* Accept actual connection from the client */
-    newsockfd = accept(newsockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen);
-
+    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen);
     if (newsockfd < 0) {
         perror("ERROR on accept");
         exit(1);

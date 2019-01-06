@@ -13,7 +13,6 @@ void MyTestClientHandler::handleClient(int newsockfd) {
     bool end = false;
 
     while (end != true) {
-
         string buff = read_until(newsockfd, "\n");
         if (buff == "end") {
             end = true;
