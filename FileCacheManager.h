@@ -15,13 +15,13 @@
 using namespace std;
 
 class FileCacheManager : public CacheManager {
-    map<Problem,Solution> map1;
+    map<Problem*,Solution*> map1;
 
  public:
-    FileCacheManager();
-    virtual bool isThereSolution(Problem porblem);
-    virtual Solution getSolution(Problem porblem);
-    virtual void addSolution(Solution s,Problem porblem);
+    FileCacheManager(){};
+    virtual bool isThereSolution(Problem* porblem);
+    virtual Solution getSolution(Problem* porblem);
+    virtual void addSolution(Solution* s,Problem* porblem);
 };
 
 
