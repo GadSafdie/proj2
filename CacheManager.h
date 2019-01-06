@@ -8,14 +8,14 @@
 
 #include "Problem.h"
 #include "Solution.h"
-
+template <class P, class S>
 class CacheManager {
 
 public:
     CacheManager(){};
-    virtual bool isThereSolution(Problem porblem) = 0;
-    virtual Solution getSolution(Problem porblem) = 0;
-    virtual void addSolution(Solution s,Problem porblem) = 0;
+    virtual bool isThereSolution(P porblem) = 0;
+    virtual S getSolution(P porblem) = 0;
+    virtual void addSolution(S s,P porblem) = 0;
 
 };
 

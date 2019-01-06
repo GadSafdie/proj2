@@ -1,21 +1,14 @@
 #include <iostream>
+#include "Main.h"
+
 using namespace std;
 
-namespace server_side {
-    void open(int port) {
-        cout << "open" << endl;
 
-    }
-    void stop(int port) {
-        cout << "close" << endl;
+int main(int argc, char *argv[]) {
 
-    }
-}
-
-
-int main() {
-    std::cout << "Hello, GADIIIIIII!" << std::endl;
-
-
+    char* port1 = argv[1];
+    int port = atoi(port1);
+    boot::Main* m;
+    m->main(port);
     return 0;
 }

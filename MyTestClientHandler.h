@@ -10,12 +10,19 @@
 #include "Solver.h"
 #include "CacheManager.h"
 
+using namespace std;
+
 class MyTestClientHandler : public ClientHandler {
-    Solver* solver;
-    CacheManager* cm;
+        Solver<string, string>* solver;
+    CacheManager<string, string>* cm;
 public:
-    virtual void handleClient(std::ifstream ifstream,std::ofstream ofstream);
-    void writeSoultion(int id,char* buffer);
+    MyTestClientHandler(Solver<string, string>* s, CacheManager<string, string>* cm1){
+        solver=s;
+        cm=cm1;
+    }
+    virtual void handleClient(int newsockfd);
+    //void writeSoultion(int id,char* buffer);
+    string read_until(int sockfd, string sep);
 
 
 };

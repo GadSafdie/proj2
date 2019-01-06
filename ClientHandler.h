@@ -9,9 +9,8 @@
 #include <fstream>
 
 class ClientHandler {
-    virtual void handleClient(std::ifstream ifstream,std::ofstream ofstream){
-
-    }
+public:
+    virtual void handleClient(int newsockfd)=0;
 
 };
 

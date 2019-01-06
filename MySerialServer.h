@@ -7,15 +7,16 @@
 
 
 #include "Server.h"
-
-class MySerialServer : public Server{
-    int socketId;
-
+class MySerialServer : public server_side::Server{
+    int port;
 
 public:
-    virtual void open(int port, ClientHandler c);
-    virtual void stop();
-    //static void listenClient(int sockid,ClientHandler c);
+    MySerialServer(int port){
+        port=port;
+    };
+    virtual void open(int port, ClientHandler* c);
+    virtual void stop(){};
+    static void clientQuque(int newsockfd, ClientHandler* c);
 
 
 };

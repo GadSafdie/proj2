@@ -9,12 +9,15 @@
 #include "ClientHandler.h"
 
 
+namespace server_side{
+    class Server;
+}
 
-
-class Server : public ClientHandler{
-
+class server_side::Server : public ClientHandler{
+protected:
+    Server(){};
 public:
-    virtual void open(int port, ClientHandler c)=0;
+    virtual void open(int port, ClientHandler* c)=0;
     virtual void stop()=0;
 };
 
