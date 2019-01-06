@@ -18,7 +18,6 @@ void MyTestClientHandler::handleClient(int newsockfd) {
         char buff[256];
         ssize_t n;
         // This send() function sends the 13 bytes of the string to the new socket
-        send(newsockfd, "enter a string\r\n", 17, 0);
 
         bzero(buff, 256);
         n = read(newsockfd, buff, 255);
@@ -36,15 +35,15 @@ void MyTestClientHandler::handleClient(int newsockfd) {
             if (cm->isThereSolution(str)) {
                 //write on socket
                 string h = cm->getSolution(str);
-                h = h +"\n";
+                h = h+"\n";
                 const char *charKochavitName = h.c_str(); // convert the string to char *
-                send(newsockfd,charKochavitName,17, 0);
+                send(newsockfd,charKochavitName,h.size(), 0);
             } else {
                 string h = solver->solve(str);
                 cm->addSolution(h, str);
                 h = h+"\n";
                 const char *charKochavitName = h.c_str(); // convert the string to char *
-                send(newsockfd,charKochavitName,17, 0);
+                send(newsockfd,charKochavitName,h.size(), 0);
 
             }
         }
