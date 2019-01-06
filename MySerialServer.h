@@ -9,6 +9,14 @@
 #include "Server.h"
 
 class MySerialServer : public Server{
+    int socketId;
+
+
+public:
+    virtual void open(int port, ClientHandler c);
+    virtual void stop();
+    //static void listenClient(int sockid,ClientHandler c);
+
 
 };
 

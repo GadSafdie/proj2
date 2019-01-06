@@ -11,8 +11,13 @@
 #include "CacheManager.h"
 
 class MyTestClientHandler : public ClientHandler {
-    Solver solver;
+    Solver* solver;
     CacheManager* cm;
+public:
+    virtual void handleClient(std::ifstream ifstream,std::ofstream ofstream);
+    void writeSoultion(int id,char* buffer);
+
+
 };
 
 
