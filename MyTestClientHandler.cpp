@@ -16,20 +16,18 @@ void MyTestClientHandler::handleClient(int newsockfd, int sockfd) {
 
     while (end != true) {
         char buff[256];
-        int n;
+        ssize_t n;
         // This send() function sends the 13 bytes of the string to the new socket
         send(newsockfd, "Hello, world!\n", 13, 0);
 
         bzero(buff, 256);
+        n = read(sockfd, buff, 255);
         printf("Here is the message: %s\n", buff);
-        n = read(newsockfd, buff, 255);
         if (n < 0) cout << ("ERROR reading from socket") << endl;
         
         if (strcmp(buff, "end") == 1) {
             end = true;
-
         } else {
-
             if (cm->isThereSolution(buff)) {
                 //write on socket
                 cout << cm->getSolution(buff) << endl;
@@ -37,7 +35,6 @@ void MyTestClientHandler::handleClient(int newsockfd, int sockfd) {
                 string temp = solver->solve(buff);
                 cout << temp << endl;
                 cm->addSolution(temp, buff);
-
             }
         }
 
