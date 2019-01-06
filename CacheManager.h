@@ -12,6 +12,7 @@
 class CacheManager {
 
 public:
+    CacheManager(){};
     virtual bool isThereSolution(Problem porblem) = 0;
     virtual Solution getSolution(Problem porblem) = 0;
     virtual void addSolution(Solution s,Problem porblem) = 0;

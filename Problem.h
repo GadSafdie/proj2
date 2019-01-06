@@ -8,6 +8,9 @@
 
 class Problem {
 
+public:
+    Problem(){};
+
 };
 
 

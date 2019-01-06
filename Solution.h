@@ -8,6 +8,8 @@
 
 class Solution {
 
+public:
+    Solution(){};
 };
 
 
