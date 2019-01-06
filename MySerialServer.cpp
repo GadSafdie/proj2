@@ -18,7 +18,7 @@
 using namespace std;
 
 
-void MySerialServer:: open(int port, ClientHandler* c){
+void MySerialServer::open(int port, ClientHandler *c) {
     int sockfd, portno;
     struct sockaddr_in serv_addr;
 
@@ -53,27 +53,25 @@ void MySerialServer:: open(int port, ClientHandler* c){
 
 }
 
-void MySerialServer::clientQuque(int sockfd, ClientHandler* c){
-while (true){
-    int clilen;
-    int newsockfd;
-    struct sockaddr_in cli_addr;
+void MySerialServer::clientQuque(int sockfd, ClientHandler *c) {
+    while (true) {
+        int clilen;
+        int newsockfd;
+        struct sockaddr_in cli_addr;
 
-    clilen = sizeof(cli_addr);
+        clilen = sizeof(cli_addr);
 
 /* Accept actual connection from the client */
-    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen);
-    if (newsockfd < 0) {
-        perror("ERROR on accept");
-        exit(1);
+        newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *) &clilen);
+        if (newsockfd < 0) {
+            perror("ERROR on accept");
+            exit(1);
+        }
+
+        c->handleClient(newsockfd, sockfd);
+
+
     }
-
-    c->handleClient(newsockfd);
-
-
-}
-
-
 
 
 }

@@ -13,14 +13,16 @@
 using namespace std;
 
 class MyTestClientHandler : public ClientHandler {
-        Solver<string, string>* solver;
-    CacheManager<string, string>* cm;
+    Solver<string, string> *solver;
+    CacheManager<string, string> *cm;
 public:
-    MyTestClientHandler(Solver<string, string>* s, CacheManager<string, string>* cm1){
-        solver=s;
-        cm=cm1;
+    MyTestClientHandler(Solver<string, string> *s, CacheManager<string, string> *cm1) {
+        solver = s;
+        cm = cm1;
     }
-    virtual void handleClient(int newsockfd);
+
+    virtual void handleClient(int newsockfd, int socketfd);
+
     //void writeSoultion(int id,char* buffer);
     string read_until(int sockfd, string sep);
 

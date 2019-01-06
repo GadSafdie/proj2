@@ -5,16 +5,27 @@
 #include <unistd.h>
 #include <cstring>
 #include <iostream>
+#include <sys/socket.h>
+#include <error.h>
 #include "MyTestClientHandler.h"
 
 using namespace std;
 
-void MyTestClientHandler::handleClient(int newsockfd) {
+void MyTestClientHandler::handleClient(int newsockfd, int sockfd) {
     bool end = false;
 
     while (end != true) {
-        string buff = read_until(newsockfd, "\n");
-        if (buff == "end") {
+        char buff[256];
+        int n;
+        // This send() function sends the 13 bytes of the string to the new socket
+        send(newsockfd, "Hello, world!\n", 13, 0);
+
+        bzero(buff, 256);
+        printf("Here is the message: %s\n", buff);
+        n = read(newsockfd, buff, 255);
+        if (n < 0) cout << ("ERROR reading from socket") << endl;
+        
+        if (strcmp(buff, "end") == 1) {
             end = true;
 
         } else {
