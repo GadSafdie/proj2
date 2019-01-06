@@ -15,6 +15,7 @@ using namespace std;
 class MyTestClientHandler : public ClientHandler {
     Solver<string, string> *solver;
     CacheManager<string, string> *cm;
+
 public:
 
 
@@ -32,7 +33,6 @@ public:
 
     //void writeSoultion(int id,char* buffer);
     string read_until(int sockfd, string sep);
-
 
 };
 
