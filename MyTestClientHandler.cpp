@@ -36,6 +36,7 @@ void MyTestClientHandler::handleClient(int newsockfd) {
             if (cm->isThereSolution(str)) {
                 //write on socket
                 string h = cm->getSolution(str);
+                h = h +"\r";
                 const char *charKochavitName = h.c_str(); // convert the string to char *
                 send(newsockfd,charKochavitName,17, 0);
             } else {
