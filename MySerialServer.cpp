@@ -46,30 +46,30 @@ void MySerialServer::open(int port, ClientHandler *c) {
     }
 
     clientQuque(sockfd,c);
-    thread thread1(clientQuque, sockfd,c);
-
+    thread thread4(clientQuque, sockfd,c);
+    thread4.detach();
+    close(sockfd);
 
 }
 
 void MySerialServer::clientQuque(int sockfd, ClientHandler *c) {
     struct sockaddr_in cli_addr;
-    int clilen, cliSock;
+    int clilen, newSockfd;
 
     while (true) {
         listen(sockfd, 1);
         clilen = sizeof(cli_addr);
 
         // Accept actual connection from the client
-        cliSock = accept(sockfd, (struct sockaddr *) &cli_addr,
+        newSockfd = accept(sockfd, (struct sockaddr *) &cli_addr,
                          (socklen_t *) &clilen);
 
-        if (cliSock < 0) {
+        if (newSockfd < 0) {
             perror("ERROR on accept");
             exit(1);
         }
         int x;
-        c->handleClient(cliSock, x);
+        c->handleClient(newSockfd);
     }
 }
 
-MySerialServer::MySerialServer() {}

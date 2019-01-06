@@ -11,30 +11,40 @@
 
 using namespace std;
 
-void MyTestClientHandler::handleClient(int newsockfd, int sockfd) {
+void MyTestClientHandler::handleClient(int newsockfd) {
     bool end = false;
 
     while (end != true) {
         char buff[256];
         ssize_t n;
         // This send() function sends the 13 bytes of the string to the new socket
-        send(newsockfd, "Hello, world!\n", 13, 0);
+        send(newsockfd, "enter a string\r\n", 17, 0);
 
         bzero(buff, 256);
-        n = read(sockfd, buff, 255);
-        printf("Here is the message: %s\n", buff);
+        n = read(newsockfd, buff, 255);
+
+        int size = strlen(buff);
+        string str ="";
+        for (int i = 0; i < size - 2 ; ++i) {
+            str.push_back(buff[i]);
+        }
+
         if (n < 0) cout << ("ERROR reading from socket") << endl;
-        
-        if (strcmp(buff, "end") == 1) {
+        if (str ==  "end") {
             end = true;
         } else {
-            if (cm->isThereSolution(buff)) {
+            if (cm->isThereSolution(str)) {
                 //write on socket
-                cout << cm->getSolution(buff) << endl;
+                string h = cm->getSolution(str);
+                const char *charKochavitName = h.c_str(); // convert the string to char *
+                send(newsockfd,charKochavitName,17, 0);
             } else {
-                string temp = solver->solve(buff);
-                cout << temp << endl;
-                cm->addSolution(temp, buff);
+                string h = solver->solve(str);
+                cm->addSolution(h, str);
+                h = h+"\n";
+                const char *charKochavitName = h.c_str(); // convert the string to char *
+                send(newsockfd,charKochavitName,17, 0);
+
             }
         }
 

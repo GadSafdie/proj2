@@ -12,7 +12,7 @@ class ClientHandler {
 
 public:
     ClientHandler(){};
-    virtual void handleClient(int newsockfd,int sockfd)=0;
+    virtual void handleClient(int newsockfd)=0;
 
 };
 
