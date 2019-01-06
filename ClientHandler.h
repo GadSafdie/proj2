@@ -9,7 +9,9 @@
 #include <fstream>
 
 class ClientHandler {
+
 public:
+    ClientHandler(){};
     virtual void handleClient(int newsockfd)=0;
 
 };
