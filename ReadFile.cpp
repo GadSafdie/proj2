@@ -17,23 +17,24 @@ map<string, string> ReadFile::ReadFileCacheManager() {
             int flag = 0;
             if (line != "") {
                 for (int i = 0; i < line.length(); ++i) {
-                    if (line[i] != '$') {
-                        first = first + line[i];
-                    } else {
-                        if (flag == 0) {
-                            flag = 1;
+                    if (flag == 0) {
+                        if (line[i] != '$') {
+                            first = first + line[i];
                         } else {
-                            second = second + line[i];
+                            flag = 1;
                         }
-
+                    } else {
+                        second = second + line[i];
                     }
+
+
                 }
                 le.insert(std::pair<string, string>(first, second));
-
+                first = "";
+                second = "";
 
             } else {
-                string first = "";
-                string second = "";
+
                 break;
             }
         }

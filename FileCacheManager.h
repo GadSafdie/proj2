@@ -32,7 +32,7 @@ class FileCacheManager : public CacheManager<string,string> {
     map<string,string> getCacheMap(){
         return cacheMap;
     }
-    ~FileCacheManager(){
+    void exit(){
         WriteFile *write;
         map<string,string>::const_iterator iterator;
         string first;

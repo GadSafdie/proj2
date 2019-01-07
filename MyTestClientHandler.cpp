@@ -8,6 +8,7 @@
 #include <sys/socket.h>
 #include <error.h>
 #include "MyTestClientHandler.h"
+#include "FileCacheManager.h"
 
 using namespace std;
 
@@ -32,6 +33,9 @@ void MyTestClientHandler::handleClient(int newsockfd) {
 
 
         if (str == "end") {
+            FileCacheManager* fileCacheManager = dynamic_cast<FileCacheManager*>(this->cm);
+            fileCacheManager->exit();
+
             end = true;
         } else {
             if (cm->isThereSolution(str)) {
