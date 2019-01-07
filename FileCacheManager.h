@@ -12,35 +12,54 @@
 #include "Problem.h"
 #include "WriteFile.h"
 #include "MyTestClientHandler.h"
+#include "ReadFile.h"
 
 
 using namespace std;
 
-
-class FileCacheManager : public CacheManager<string,string> {
-    map<string,string> cacheMap;
+template<class P, class S>
+class FileCacheManager : public CacheManager<P, S> {
+    map<P, S> cacheMap;
     int flag;
 
- public:
-    FileCacheManager(){
-        this->flag=0;
+public:
+    FileCacheManager() {
+        this->flag = 0;
     }
-    bool isThereSolution(string porblem);
-    virtual string getSolution(string porblem);
-    virtual void addSolution(string s,string porblem);
 
-    map<string,string> getCacheMap(){
-        return cacheMap;
+    bool isThereSolution(string porblem) {
+        if (flag == 0) {
+            ReadFile *readFile;
+            cacheMap = readFile->ReadFileCacheManager();
+            flag = 1;
+        }
+
+        for (typename ::map<P, S>::iterator it = cacheMap.begin(); it != cacheMap.end(); ++it) {
+            if (it == cacheMap.end()) {
+                return true;
+            }
+        }
+        return false;
     }
-    void exit(){
+
+    virtual string getSolution(P porblem) {
+        return cacheMap.find(porblem)->second;
+    }
+
+    virtual void addSolution(S s, P porblem) {
+        cacheMap.insert(std::pair<P, S>(porblem, s));
+    }
+
+
+    void exit() {
         WriteFile *write;
-        map<string,string>::const_iterator iterator;
-        string first;
-        string second;
-        for (iterator =  this->cacheMap.begin(); iterator != this->cacheMap.end(); ++iterator) {
+        typename ::map<P, S>::iterator iterator;
+        P first;
+        S second;
+        for (iterator = this->cacheMap.begin(); iterator != this->cacheMap.end(); ++iterator) {
             first = iterator->first;
             second = iterator->second;
-            write->writeFileCacheManager(first,second);
+            write->writeFileCacheManager(first, second);
         }
     }
 

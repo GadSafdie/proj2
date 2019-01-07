@@ -13,12 +13,13 @@
 
 class MySerialServer : public server_side::Server{
     ClientHandler* ca;
+    int sock;
 public:
     MySerialServer(){};
 
     void open(int port, ClientHandler* ca);
     static void exit11(ClientHandler* clientHandler);
-    void stop(){};
+    virtual void stop();
     static void clientQuque(int newsockfd, ClientHandler* c);
     virtual void handleClient(int newsockfd){};
 };

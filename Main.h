@@ -19,7 +19,7 @@ class boot::Main {
 public:
     void main(int port){
         StringReverser sr;
-        FileCacheManager fcm;
+        FileCacheManager<string,string> fcm;
         auto c = new MyTestClientHandler(sr,fcm);
         auto mySerialServer = new MySerialServer();
         mySerialServer->open(port,c);

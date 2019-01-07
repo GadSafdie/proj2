@@ -25,6 +25,7 @@ void MySerialServer::open(int port, ClientHandler *c) {
 
     /* First call to socket() function */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    this->sock = sockfd;
 
     if (sockfd < 0) {
         perror("ERROR opening socket");
@@ -45,7 +46,7 @@ void MySerialServer::open(int port, ClientHandler *c) {
         perror("ERROR on binding");
         exit(1);
     }
-    listen(sockfd, 1);
+    listen(sockfd, 5);
 
     struct sockaddr_in cli_addr;
     int clilen;
@@ -76,6 +77,7 @@ void MySerialServer::clientQuque(int sockfd, ClientHandler *c) {
         if (val == 0) {
             cout << "time out" << endl;
             gad=false;
+            close(sockfd);
             exit11(c);
         }else{
             if (newSockfd < 0) {
@@ -90,20 +92,24 @@ void MySerialServer::clientQuque(int sockfd, ClientHandler *c) {
 
 }
 
+void MySerialServer:: stop(){};
+
+
 void MySerialServer::exit11(ClientHandler* clientHandler) {
-    WriteFile *write;
+//    WriteFile *write;
     map<string,string>::const_iterator iterator;
     string first;
     string second;
     MyTestClientHandler* mtch = dynamic_cast<MyTestClientHandler*>(clientHandler);
     CacheManager<string,string>* cm1 = mtch->getCacheManager();
-    FileCacheManager* fileCacheManager = dynamic_cast<FileCacheManager*>(cm1);
-    map<string,string> cacheMap = fileCacheManager->getCacheMap();
-    for (iterator =  cacheMap.begin(); iterator != cacheMap.end(); ++iterator) {
-        first = iterator->first;
-        second = iterator->second;
-        write->writeFileCacheManager(first,second);
-    }
+    FileCacheManager<string,string>* fileCacheManager = dynamic_cast<FileCacheManager<string,string>*>(cm1);
+//    map<string,string> cacheMap = fileCacheManager->getCacheMap();
+//    for (iterator =  cacheMap.begin(); iterator != cacheMap.end(); ++iterator) {
+//        first = iterator->first;
+//        second = iterator->second;
+//        write->writeFileCacheManager(first,second);
+//    }
+fileCacheManager->exit();
 
 
 }
