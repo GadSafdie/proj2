@@ -15,16 +15,11 @@ class MySerialServer : public server_side::Server{
     ClientHandler* ca;
 public:
     MySerialServer(){};
-    virtual void open(int port, ClientHandler* ca);
-    virtual void stop(){
 
-
-    };
+    void open(int port, ClientHandler* ca);
+    virtual void stop(){};
     static void clientQuque(int newsockfd, ClientHandler* c);
     virtual void handleClient(int newsockfd){};
-
-
-
 };
 
 

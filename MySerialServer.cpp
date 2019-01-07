@@ -19,8 +19,8 @@ using namespace std;
 
 
 void MySerialServer::open(int port, ClientHandler *c) {
-    this->ca=c;
-    int sockfd ,portno;
+    this->ca = c;
+    int sockfd, portno;
     struct sockaddr_in serv_addr;
 
     /* First call to socket() function */
@@ -46,8 +46,8 @@ void MySerialServer::open(int port, ClientHandler *c) {
         exit(1);
     }
 
-    clientQuque(sockfd,c);
-    thread thread4(clientQuque, sockfd,c);
+    clientQuque(sockfd, c);
+    thread thread4(clientQuque, sockfd, c);
     thread4.detach();
     close(sockfd);
 
@@ -56,21 +56,35 @@ void MySerialServer::open(int port, ClientHandler *c) {
 void MySerialServer::clientQuque(int sockfd, ClientHandler *c) {
     struct sockaddr_in cli_addr;
     int clilen, newSockfd;
-
     while (true) {
+        int val = 0;
         listen(sockfd, 1);
         clilen = sizeof(cli_addr);
-
         // Accept actual connection from the client
-        newSockfd = accept(sockfd, (struct sockaddr *) &cli_addr,
-                         (socklen_t *) &clilen);
-
+        std::thread t1([&]() {
+            newSockfd = accept(sockfd, (struct sockaddr *) &cli_addr,
+                               (socklen_t *) &clilen);
+            val = 1;
+        });
+        std::this_thread::sleep_for(std::chrono::seconds(6));
+        t1.detach();
+        if (val == 0) {
+            cout << "time out" << endl;
+            stop();
+        }
         if (newSockfd < 0) {
             perror("ERROR on accept");
             exit(1);
         }
-        int x;
         c->handleClient(newSockfd);
     }
+
+
 }
+
+
+
+
+
+
 
