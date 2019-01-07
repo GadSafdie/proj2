@@ -7,12 +7,19 @@
 
 
 #include "Server.h"
-class MySerialServer : public server_side::Server{
+#include "WriteFile.h"
+#include "MyTestClientHandler.h"
+#include "FileCacheManager.h"
 
+class MySerialServer : public server_side::Server{
+    ClientHandler* ca;
 public:
     MySerialServer(){};
-    virtual void open(int port, ClientHandler* c);
-    virtual void stop(){};
+    virtual void open(int port, ClientHandler* ca);
+    virtual void stop(){
+
+
+    };
     static void clientQuque(int newsockfd, ClientHandler* c);
     virtual void handleClient(int newsockfd){};
 

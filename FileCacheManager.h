@@ -10,19 +10,40 @@
 #include "CacheManager.h"
 #include "Solution.h"
 #include "Problem.h"
+#include "WriteFile.h"
+#include "MyTestClientHandler.h"
 
 
 using namespace std;
 
 
 class FileCacheManager : public CacheManager<string,string> {
-    map<string,string> map1;
+    map<string,string> cacheMap;
+    int flag;
 
  public:
-    FileCacheManager(){};
-    virtual bool isThereSolution(string porblem);
+    FileCacheManager(){
+        this->flag=0;
+    }
+    bool isThereSolution(string porblem);
     virtual string getSolution(string porblem);
     virtual void addSolution(string s,string porblem);
+
+    map<string,string> getCacheMap(){
+        return cacheMap;
+    }
+    ~FileCacheManager(){
+        WriteFile *write;
+        map<string,string>::const_iterator iterator;
+        string first;
+        string second;
+        for (iterator =  this->cacheMap.begin(); iterator != this->cacheMap.end(); ++iterator) {
+            first = iterator->first;
+            second = iterator->second;
+            write->writeFileCacheManager(first,second);
+        }
+    }
+
 };
 
 

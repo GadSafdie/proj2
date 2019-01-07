@@ -20,8 +20,8 @@ public:
     void main(int port){
         StringReverser sr;
         FileCacheManager fcm;
-        MyTestClientHandler* c = new MyTestClientHandler(sr,fcm);
-        MySerialServer* mySerialServer = new MySerialServer();
+        auto c = new MyTestClientHandler(sr,fcm);
+        auto mySerialServer = new MySerialServer();
         mySerialServer->open(port,c);
     }
 };

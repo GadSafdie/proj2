@@ -19,6 +19,7 @@ using namespace std;
 
 
 void MySerialServer::open(int port, ClientHandler *c) {
+    this->ca=c;
     int sockfd ,portno;
     struct sockaddr_in serv_addr;
 

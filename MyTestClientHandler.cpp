@@ -20,35 +20,39 @@ void MyTestClientHandler::handleClient(int newsockfd) {
         // This send() function sends the 13 bytes of the string to the new socket
 
         bzero(buff, 256);
+
         n = read(newsockfd, buff, 255);
+        if (n < 0) cout << ("ERROR reading from socket") << endl;
 
         int size = strlen(buff);
-        string str ="";
-        for (int i = 0; i < size - 2 ; ++i) {
+        string str = "";
+        for (int i = 0; i < size - 2; ++i) {
             str.push_back(buff[i]);
         }
 
-        if (n < 0) cout << ("ERROR reading from socket") << endl;
-        if (str ==  "end") {
+
+        if (str == "end") {
             end = true;
         } else {
             if (cm->isThereSolution(str)) {
                 //write on socket
                 string h = cm->getSolution(str);
-                h = h+"\n";
+                h = h + "\n";
                 const char *charKochavitName = h.c_str(); // convert the string to char *
-                send(newsockfd,charKochavitName,h.size(), 0);
+                send(newsockfd, charKochavitName, h.size(), 0);
             } else {
                 string h = solver->solve(str);
                 cm->addSolution(h, str);
-                h = h+"\n";
+                h = h + "\n";
                 const char *charKochavitName = h.c_str(); // convert the string to char *
-                send(newsockfd,charKochavitName,h.size(), 0);
+                send(newsockfd, charKochavitName, h.size(), 0);
 
             }
         }
 
     }
+
+
 }
 
 

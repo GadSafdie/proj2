@@ -17,9 +17,6 @@ class MyTestClientHandler : public ClientHandler {
     CacheManager<string, string> *cm;
 
 public:
-
-
-
     MyTestClientHandler(Solver<string, string> &s, CacheManager<string, string> &cm1) {
         solver = &s;
         cm = &cm1;
@@ -33,6 +30,9 @@ public:
 
     //void writeSoultion(int id,char* buffer);
     string read_until(int sockfd, string sep);
+    CacheManager<string, string>* getCacheManager(){
+        return this->cm;
+    }
 
 };
 
