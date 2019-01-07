@@ -45,21 +45,26 @@ void MySerialServer::open(int port, ClientHandler *c) {
         perror("ERROR on binding");
         exit(1);
     }
+    listen(sockfd, 1);
 
-    clientQuque(sockfd, c);
+    struct sockaddr_in cli_addr;
+    int clilen;
+
+    clilen = sizeof(cli_addr);
+//    clientQuque(sockfd, c);
     thread thread4(clientQuque, sockfd, c);
     thread4.detach();
-    close(sockfd);
+//    close(sockfd);
 
 }
 
 void MySerialServer::clientQuque(int sockfd, ClientHandler *c) {
     struct sockaddr_in cli_addr;
     int clilen, newSockfd;
-    while (true) {
+    bool gad=true;
+    while (gad) {
         int val = 0;
-        listen(sockfd, 1);
-        clilen = sizeof(cli_addr);
+
         // Accept actual connection from the client
         std::thread t1([&]() {
             newSockfd = accept(sockfd, (struct sockaddr *) &cli_addr,
@@ -70,13 +75,34 @@ void MySerialServer::clientQuque(int sockfd, ClientHandler *c) {
         t1.detach();
         if (val == 0) {
             cout << "time out" << endl;
-            stop();
+            gad=false;
+            exit11(c);
+        }else{
+            if (newSockfd < 0) {
+                perror("ERROR on accept");
+                exit(1);
+            }
+            c->handleClient(newSockfd);
         }
-        if (newSockfd < 0) {
-            perror("ERROR on accept");
-            exit(1);
-        }
-        c->handleClient(newSockfd);
+
+    }
+
+
+}
+
+void MySerialServer::exit11(ClientHandler* clientHandler) {
+    WriteFile *write;
+    map<string,string>::const_iterator iterator;
+    string first;
+    string second;
+    MyTestClientHandler* mtch = dynamic_cast<MyTestClientHandler*>(clientHandler);
+    CacheManager<string,string>* cm1 = mtch->getCacheManager();
+    FileCacheManager* fileCacheManager = dynamic_cast<FileCacheManager*>(cm1);
+    map<string,string> cacheMap = fileCacheManager->getCacheMap();
+    for (iterator =  cacheMap.begin(); iterator != cacheMap.end(); ++iterator) {
+        first = iterator->first;
+        second = iterator->second;
+        write->writeFileCacheManager(first,second);
     }
 
 

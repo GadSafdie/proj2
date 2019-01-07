@@ -33,9 +33,9 @@ void MyTestClientHandler::handleClient(int newsockfd) {
 
 
         if (str == "end") {
-            FileCacheManager* fileCacheManager = dynamic_cast<FileCacheManager*>(this->cm);
-            fileCacheManager->exit();
-
+//            FileCacheManager* fileCacheManager = dynamic_cast<FileCacheManager*>(this->cm);
+//            fileCacheManager->exit();
+            close(newsockfd);
             end = true;
         } else {
             if (cm->isThereSolution(str)) {

@@ -17,7 +17,8 @@ public:
     MySerialServer(){};
 
     void open(int port, ClientHandler* ca);
-    virtual void stop(){};
+    static void exit11(ClientHandler* clientHandler);
+    void stop(){};
     static void clientQuque(int newsockfd, ClientHandler* c);
     virtual void handleClient(int newsockfd){};
 };
