@@ -8,7 +8,8 @@
 #include <string>
 
 using namespace std;
-template <class T>
+
+template<class T>
 
 class State {
     T state;
@@ -16,12 +17,20 @@ class State {
     State<T> camefrom;
 
 public:
-    State(T state){
-        this->state=state;
-        this->cost=0;
+    State(T state) {
+        this->state = state;
+        this->cost = 0;
     }
 
     bool operator==(State<T> other);
+
+    double getCost() {
+        return cost;
+    }
+
+    double setCost() {
+        return cost;
+    }
 
 
 };
