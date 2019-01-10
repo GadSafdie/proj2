@@ -6,7 +6,7 @@
 #define PROJ2_SEARCHABLE_H
 
 #include "State.h"
-#include <vector>
+#include "vector"
 template <class T>
 
 class Searchable {
@@ -19,6 +19,8 @@ public:
     virtual vector<State<T>>getAllPossibleStates(State<T> s) = 0;
 
     virtual void InitlizeAllStates() = 0;
+
+    virtual string getDirections(vector<State<T>> path) = 0;
 
 };
 

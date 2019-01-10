@@ -47,8 +47,9 @@ public:
             }
         }
 
+        string newPath = searchable->getDirections;
 
-        return path;
+        return newPath;
 
     }
 };
