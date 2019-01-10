@@ -8,8 +8,8 @@
 #include "Searchable.h"
 
 template<class T>
-class MetrixProblem : public Searchable<T> {
-    vector<vector<State<vector<int>> *>> metrix;
+class MatrixProblem : public Searchable<T> {
+    vector<vector<State<vector<int>> *>> matrix;
     State<T> *root;
     State<T> *goal;
     int horizonBound;
@@ -17,12 +17,12 @@ class MetrixProblem : public Searchable<T> {
 
 public:
 
-    MetrixProblem(vector<vector<State<vector<int>> *>> metrix1, State<T> *root, State<T> *goal) {
+    MatrixProblem(vector<vector<State<vector<int>> *>> matrix1, State<T> *root, State<T> *goal) {
         this->root = root;
         this->goal = goal;
-        this->horizonBound = metrix1.size() - 1;
-        this->verticalBound = metrix1[0].size() - 1;
-        this->metrix = metrix1;
+        this->horizonBound = matrix1.size() - 1;
+        this->verticalBound = matrix1[0].size() - 1;
+        this->matrix = matrix1;
     }
 
     virtual State<T> *getInitalState() {
@@ -46,7 +46,7 @@ public:
             return false;
         } else {
 //for -1 as minus infinite
-            if ((metrix[x][y]) >= 0) {
+            if ((matrix[x][y]) >= 0) {
                 return true;
             }
         }
@@ -72,7 +72,7 @@ public:
             newPoint.push_back(newY);
             auto newStateRight = new State<T>(newPoint);
             newStateRight->setcameFrom(s);
-            newStateRight->setCost(metrix[newX][newY]);
+            newStateRight->setCost(matrix[newX][newY]);
             newPoint.pop_back();
             newPoint.pop_back();
             states.push_back(newStateRight);
@@ -85,7 +85,7 @@ public:
             newPoint.push_back(newY);
             auto newStateDown = new State<T>(newPoint);
             newStateDown->setcameFrom(s);
-            newStateDown->setCost(metrix[newX][newY]);
+            newStateDown->setCost(matrix[newX][newY]);
             newPoint.pop_back();
             newPoint.pop_back();
             states.push_back(newStateDown);
@@ -98,7 +98,7 @@ public:
             newPoint.push_back(newY);
             auto newStateLeft = new State<T>(newPoint);
             newStateLeft->setcameFrom(s);
-            newStateLeft->setCost(metrix[newX][newY]);
+            newStateLeft->setCost(matrix[newX][newY]);
             newPoint.pop_back();
             newPoint.pop_back();
             states.push_back(newStateLeft);
@@ -112,7 +112,7 @@ public:
             newPoint.push_back(newY);
             auto newStateUp = new State<T>(newPoint);
             newStateUp->setcameFrom(s);
-            newStateUp->setCost(metrix[newX][newY]);
+            newStateUp->setCost(matrix[newX][newY]);
             newPoint.pop_back();
             newPoint.pop_back();
             states.push_back(newStateUp);
