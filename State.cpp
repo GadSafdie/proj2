@@ -4,9 +4,10 @@
 
 #include "State.h"
 
+template<class T>
 
-bool State::operator==(State* other) {
-    if (this->state == other->state) {
+bool State<T>::operator==(State<T> other) {
+    if (this->state == other.state) {
         return true;
     } else {
         return false;

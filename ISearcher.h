@@ -12,7 +12,7 @@ template<class S, class T>
 class ISearcher {
 public:
     // the search method
-    virtual S search(Searchable *searchable) = 0;
+    virtual S search(Searchable<T> *searchable) = 0;
 
 // get how many nodes were evaluated by the algorithm
     int getNumberOfNodesEvaluated() = 0;

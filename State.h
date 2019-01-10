@@ -6,31 +6,31 @@
 #define PROJ2_STATE_H
 
 #include <string>
-#include "vector"
-
 
 using namespace std;
 
+template<class T>
 
 class State {
-    vector<int> state;
+    T* state;
     double cost;
-    State *camefrom;
+    State<T>* camefrom;
     double pathCost;
     bool hasVisted;
 
 
+
 public:
-    State(vector<int> state) {
+    State(T* state) {
         this->state = state;
         this->cost = 0;
-        this->hasVisted = false;
+        this->hasVisted=false;
     }
 
 
-    bool operator==(State* other);
+    bool operator==(State<T> other);
 
-    State *getCamefrom() {
+    State<T>* getCamefrom() {
         return camefrom;
     }
 
@@ -50,11 +50,11 @@ public:
         pathCost = pc;
     }
 
-    State *getcameFrom() {
+    State<T>* getcameFrom() {
         return camefrom;
     }
 
-    void setcameFrom(State *pc) {
+    void setcameFrom(State<T>* pc) {
         camefrom = pc;
     }
 
@@ -63,10 +63,10 @@ public:
     }
 
     void setHasVisited() {
-        hasVisted = true;
+        hasVisted=true;
     }
 
-    vector<int> getState() {
+    T getState(){
         return state;
     }
 
