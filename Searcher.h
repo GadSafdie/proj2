@@ -13,28 +13,24 @@
 #include <iostream>
 #include <list>
 
-template<class S, class T>
-class Searcher : public ISearcher<S, T> {
+template<class T>
+class Searcher : public ISearcher<T> {
+protected:
     priority_queue<State<T>> openList;
     int evaluatedNodes;
 
 public:
-    Searcher() {
-        openList = new priority_queue<State<T>>();
-        evaluatedNodes = 0;
-    }
 
-
-protected:
 
     priority_queue<State <T>> getOpenList() {
         return openList;
     }
 
 
-    State <T> popOpenList() {
+    State<T>* popOpenList() {
         evaluatedNodes++;
-        return openList.pop();
+        State<T>* s = openList.pop();
+        return s;
     }
 
     void pushToOpenList(State <T> *newSate) {
@@ -45,7 +41,7 @@ protected:
         bool stateCon = false;
         vector<State<T>> temp;
         // check if s is in the queue by pop all the elements
-        while (!this->pq.empty()) {
+        while (!this->openList.empty()) {
             State<T> var = this->popFromthePq();
             if (var == check) {
                 stateCon = true;
@@ -66,7 +62,7 @@ protected:
     void updatePriority(State<T> *check) {
         vector<State<T>> temp;
         // check if s is in the queue by pop all the elements
-        while (!this->pq.empty()) {
+        while (!this->openList.empty()) {
             State<T> var = this->popFromthePq();
             if (var == check) {
                 temp.push_back(check); // change the state in the new one
@@ -94,6 +90,11 @@ protected:
         return path;
     }
 
+    virtual string search(Searchable<T> *searchable) = 0;
+
+    virtual int getNumberOfNodesEvaluated(){
+        return evaluatedNodes;
+    }
 
 };
 

@@ -12,7 +12,7 @@ using namespace std;
 template<class T>
 
 class State {
-    T* state;
+    T state;
     double cost;
     State<T>* camefrom;
     double pathCost;
@@ -21,11 +21,9 @@ class State {
 
 
 public:
-    State(T* state) {
-        this->state = state;
-        this->cost = 0;
-        this->hasVisted=false;
-    }
+    State<T>(T state, double cost) : state(state), cost(cost), pathCost(cost),hasVisted(false), camefrom(nullptr) {}
+
+    State<T>(){}
 
 
     bool operator==(State<T> other);
@@ -50,10 +48,6 @@ public:
         pathCost = pc;
     }
 
-    State<T>* getcameFrom() {
-        return camefrom;
-    }
-
     void setcameFrom(State<T>* pc) {
         camefrom = pc;
     }
@@ -69,6 +63,7 @@ public:
     T getState(){
         return state;
     }
+
 
 };
 

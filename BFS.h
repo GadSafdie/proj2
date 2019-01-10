@@ -14,8 +14,7 @@ using namespace std;
 
 
 template<class T>
-
-class BFS : public Searcher<string, T> {
+class BFS : public Searcher<T> {
 
 public:
     string search(Searchable<T> *searchable) {
@@ -48,7 +47,6 @@ public:
         }
 
         string newPath = searchable->getDirections;
-cour<<"gadd"<<endl;
         return newPath;
 
     }

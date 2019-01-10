@@ -7,151 +7,22 @@
 
 #include "Searchable.h"
 
-template<class T>
-class MatrixProblem : public Searchable<T> {
-    vector<vector<State<vector<int>> *>> matrix;
-    State<T> *root;
-    State<T> *goal;
+class MatrixProblem : public Searchable<vector<int>> {
     int horizonBound;
     int verticalBound;
 
 public:
 
-    MatrixProblem(vector<vector<State<vector<int>> *>> matrix1, State<T> *root, State<T> *goal) {
-        this->root = root;
-        this->goal = goal;
-        this->horizonBound = matrix1.size() - 1;
-        this->verticalBound = matrix1[0].size() - 1;
-        this->matrix = matrix1;
-    }
+    MatrixProblem(std::vector<vector<State<vector<int>> *>> matrix1, State<vector<int>> *root,
+                  State<vector<int>> *goal);
 
-    State<T> *getInitalState() {
-        return root;
-    }
+    bool isInBounds(int x, int y);
 
-    State<T> *getGoalState() {
-        return goal;
-    }
+    bool canWeStepThere(int x, int y);
 
-    bool isInBounds(int x, int y) {
-        if (((x <= horizonBound) && (y <= verticalBound)) && ((x >= 0) && (y >= 0))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    virtual vector<State<vector<int>> *> getAllPossibleStates(State<vector<int>> *s) override;
 
-    bool canWeStepThere(int x, int y) {
-        if (!isInBounds(x, y)) {
-            return false;
-        } else {
-//for -1 as minus infinite
-            if ((matrix[x][y]) >= 0) {
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    vector<State<T>> getAllPossibleStates(State<T> *s) {
-        vector<State<T>> states;
-
-        vector<int> point = s->getState();
-        int x = point[0];
-        int y = point[1];
-
-        int newX;
-        int newY;
-        vector<int> newPoint;
-
-        if (canWeStepThere(x + 1, y)) {
-            newX = x + 1;
-            newY = y;
-            newPoint.push_back(newX);
-            newPoint.push_back(newY);
-            auto newStateRight = new State<T>(newPoint);
-            newStateRight->setcameFrom(s);
-            newStateRight->setCost(matrix[newX][newY]);
-            newPoint.pop_back();
-            newPoint.pop_back();
-            states.push_back(newStateRight);
-        }
-
-        if (canWeStepThere(x, y + 1)) {
-            newX = x;
-            newY = y + 1;
-            newPoint.push_back(newX);
-            newPoint.push_back(newY);
-            auto newStateDown = new State<T>(newPoint);
-            newStateDown->setcameFrom(s);
-            newStateDown->setCost(matrix[newX][newY]);
-            newPoint.pop_back();
-            newPoint.pop_back();
-            states.push_back(newStateDown);
-        }
-
-        if (canWeStepThere(x - 1, y)) {
-            newX = x - 1;
-            newY = y;
-            newPoint.push_back(newX);
-            newPoint.push_back(newY);
-            auto newStateLeft = new State<T>(newPoint);
-            newStateLeft->setcameFrom(s);
-            newStateLeft->setCost(matrix[newX][newY]);
-            newPoint.pop_back();
-            newPoint.pop_back();
-            states.push_back(newStateLeft);
-
-        }
-
-        if (canWeStepThere(x, y - 1)) {
-            newX = x + 1;
-            newY = y;
-            newPoint.push_back(newX);
-            newPoint.push_back(newY);
-            auto newStateUp = new State<T>(newPoint);
-            newStateUp->setcameFrom(s);
-            newStateUp->setCost(matrix[newX][newY]);
-            newPoint.pop_back();
-            newPoint.pop_back();
-            states.push_back(newStateUp);
-
-        }
-
-        return states;
-
-
-    }
-
-    string getDirections(vector<State<T>> path) {
-        string directions;
-        for (int i = 0; i <path.size() -1 ; ++i) {
-            vector<int> first = path[i];
-            vector<int> second = path[i+1];
-            // check if up
-            if(first[1] < second[1]){
-                directions = directions + "UP";
-            }
-                // check if down
-            else if(first[1] > second[1]){
-                directions = directions + "DOWN";
-            }
-                // check if right
-            else if(first[0] < second[0]){
-                directions = directions + "RIGHT";
-            }
-                // check if left
-            else if(first[0] > second[0]){
-                directions = directions + "LEFT";
-            }
-            if(i != path.size() -2)
-                directions = directions + ",";
-        }
-        return directions;
-    }
-
-    virtual void InitlizeAllStates() {};
+    virtual string getDirections(vector<vector<int>> path) override;
 
 };
 

@@ -6,21 +6,32 @@
 #define PROJ2_SEARCHABLE_H
 
 #include "State.h"
-#include "vector"
+#include <vector>
 template <class T>
 
 class Searchable {
+protected:
+    std::vector<vector<State<T>*>> matrix;
+    State<T>* root;
+    State<T>* goal;
+
 public:
 
-    virtual State <T> getInitalState() = 0;
+    virtual vector<vector<State<T>*>> getMatrix(){
+        return matrix;
+    }
 
-    virtual State<T> getGoalState() = 0;
+    virtual State <T>* getInitalState(){
+        return root;
+    }
 
-    virtual vector<State<T>>getAllPossibleStates(State<T> s) = 0;
+    virtual State<T>* getGoalState(){
+        return goal;
+    }
 
-    virtual void InitlizeAllStates() = 0;
+    virtual vector<State<T>*>getAllPossibleStates(State<T>* s) = 0;
 
-    virtual string getDirections(vector<State<T>> path) = 0;
+    virtual string getDirections(vector<T> path) = 0;
 
 };
 

@@ -7,15 +7,15 @@
 
 #include "Searchable.h"
 
-template<class S, class T>
+template<class T>
 
 class ISearcher {
 public:
     // the search method
-    virtual S search(Searchable<T> *searchable) = 0;
+    virtual string search(Searchable<T> *searchable) = 0;
 
 // get how many nodes were evaluated by the algorithm
-    int getNumberOfNodesEvaluated() = 0;
+    virtual int getNumberOfNodesEvaluated() = 0;
 };
 
 

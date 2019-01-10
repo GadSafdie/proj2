@@ -9,6 +9,7 @@
 #include "ClientHandler.h"
 #include "Solver.h"
 #include "CacheManager.h"
+#include "string"
 
 using namespace std;
 
