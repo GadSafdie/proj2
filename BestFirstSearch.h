@@ -7,12 +7,14 @@
 
 #include <unordered_set>
 #include <list>
+#include <vector>
 #include "Searcher.h"
 
 template<class T>
 
 
 class BestFirstSearch : public Searcher<string, T> {
+
 
 public:
     string search(Searchable<T> *searchable) { // Searcher's abstract method overriding
@@ -21,11 +23,10 @@ public:
 
         while (this->getOpenList().size() > 0) {
             State<T> n = this->popOpenList(); // inherited from Searcher, removes the best state
-            closed.Add(n);
+            closed.insert(n);
             if (n == (searchable->getGoalState()))
-                return backTrace(); // private method, back traces through the parents
-            ///GOING BACK FROM GOAL TO THE FIRDT
-// calling the delegated method, returns a list of states with n as a parent
+                return backtrace(n); // private method, back traces through the parents
+                                    // calling the delegated method, returns a list of states with n as a parent
             list<State<T>> succerssors = searchable->getAllPossibleStates(n);
             typename list<State<T>>::iterator s;
             for (s = succerssors.begin(); s != succerssors.end(); ++s) {
