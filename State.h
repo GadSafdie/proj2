@@ -61,8 +61,8 @@ public:
         return hasVisted;
     }
 
-    void setHasVisited(bool t) {
-        hasVisted=t;
+    void setHasVisited() {
+        hasVisted=true;
     }
 
 
