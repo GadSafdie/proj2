@@ -16,6 +16,8 @@ class State {
     double cost;
     State<T>* camefrom;
     double pathCost;
+    bool hasVisted;
+
 
 
 public:
