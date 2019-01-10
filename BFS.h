@@ -48,7 +48,7 @@ public:
         }
 
         string newPath = searchable->getDirections;
-
+cour<<"gadd"<<endl;
         return newPath;
 
     }
