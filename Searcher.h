@@ -64,6 +64,11 @@ protected:
     }
 
 
+    void updatePriority(State<T>* check){
+
+    }
+
+
 
 };
 

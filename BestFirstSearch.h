@@ -19,10 +19,10 @@ public:
         this->pushToOpenList(searchable->getInitalState()); // inherited from Searcher
         unordered_set<State<T>> closed;
 
-        while (this->g > 0) {
+        while (this->getOpenList().size() > 0) {
             State<T> n = this->popOpenList(); // inherited from Searcher, removes the best state
             closed.Add(n);
-            if (n == (searchable->getIGoallState()))
+            if (n == (searchable->getGoalState()))
                 return backTrace(); // private method, back traces through the parents
             ///GOING BACK FROM GOAL TO THE FIRDT
 // calling the delegated method, returns a list of states with n as a parent
