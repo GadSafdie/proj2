@@ -11,11 +11,11 @@
 class Searchable {
 public:
 
-    virtual State  getInitalState() = 0;
+    virtual State* getInitalState() = 0;
 
-    virtual State getGoalState() = 0;
+    virtual State* getGoalState() = 0;
 
-    virtual vector<State>getAllPossibleStates(State s) = 0;
+    virtual vector<State>getAllPossibleStates(State* s) = 0;
 
     virtual void InitlizeAllStates() = 0;
 
