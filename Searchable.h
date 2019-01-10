@@ -7,8 +7,8 @@
 
 #include "State.h"
 #include <vector>
-
 template <class T>
+
 class Searchable {
 public:
 
