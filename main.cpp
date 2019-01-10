@@ -21,15 +21,15 @@ int main(int argc, char *argv[]) {
 //    State<std::string>* goal = new State<std::string>("B");
 
     double input;
-    vector<vector<State<vector<int>>>> matrix;
+    vector<vector<State>> matrix;
 
     for (int i = 0; i < 3; i++) {
-        vector<State<vector<int>>> myvector;
+        vector<State> myvector;
         for (int j = 0; j < 3; j++) {
             vector<int> point;
             point.push_back(i);
             point.push_back(j);
-            State<vector<int>>* state = new State<vector<int>>(&point);
+            State* state = new State(point);
             cin >> input;
             state->setCost(input);
             myvector.push_back(*state);
@@ -39,13 +39,13 @@ int main(int argc, char *argv[]) {
     vector<int> p;
     p.push_back(0);
     p.push_back(0);
-    State<vector<int>>* root = new State<vector<int>>(&p);
+    State* root = new State(p);
     p.clear();
     p.push_back(2);
     p.push_back(2);
-    State<vector<int>>* goal = new State<vector<int>>(&p);
+    State* goal = new State(p);
 
-    MatrixProblem<vector<int>>* ma = new MatrixProblem<vector<int>>(matrix,root,goal);
+    MatrixProblem* ma = new MatrixProblem(matrix,root,goal);
 
 //    vector<State<vector<int>>> gad
 

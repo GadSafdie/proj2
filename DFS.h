@@ -12,10 +12,10 @@ template<class T>
 
 class DFS {
 
-public:
-    string search(Searchable<T> *searchable) {
-        DfsFunction(searchable->getInitalState(),searchable->getGoalState());
-    }
+//public:
+//    string search(Searchable<T> *searchable) {
+//        DfsFunction(searchable->getInitalState(),searchable->getGoalState());
+//    }
 
 };
 

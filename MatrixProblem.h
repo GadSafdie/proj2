@@ -53,7 +53,7 @@ public:
     }
 
     virtual vector<State> getAllPossibleStates(State *s) {
-        vector<State<T>> states;
+        vector<State> states;
 
         vector<int> point = s->getState();
         int x = point[0];
@@ -70,10 +70,10 @@ public:
             newPoint.push_back(newY);
             auto newStateRight = new State(newPoint);
             newStateRight->setcameFrom(s);
-            newStateRight->setCost(matrix[newX][newY]);
+            newStateRight->setCost(matrix[newX][newY].getCost());
             newPoint.pop_back();
             newPoint.pop_back();
-            states.push_back(newStateRight);
+            states.push_back(*newStateRight);
         }
 
         if (canWeStepThere(x, y + 1)) {
@@ -83,10 +83,10 @@ public:
             newPoint.push_back(newY);
             auto newStateDown = new State(newPoint);
             newStateDown->setcameFrom(s);
-            newStateDown->setCost(matrix[newX][newY]);
+            newStateDown->setCost(matrix[newX][newY].getCost());
             newPoint.pop_back();
             newPoint.pop_back();
-            states.push_back(newStateDown);
+            states.push_back(*newStateDown);
         }
 
         if (canWeStepThere(x - 1, y)) {
@@ -96,10 +96,10 @@ public:
             newPoint.push_back(newY);
             auto newStateLeft = new State(newPoint);
             newStateLeft->setcameFrom(s);
-            newStateLeft->setCost(matrix[newX][newY]);
+            newStateLeft->setCost(matrix[newX][newY].getCost());
             newPoint.pop_back();
             newPoint.pop_back();
-            states.push_back(newStateLeft);
+            states.push_back(*newStateLeft);
 
         }
 
@@ -110,10 +110,10 @@ public:
             newPoint.push_back(newY);
             auto newStateUp = new State(newPoint);
             newStateUp->setcameFrom(s);
-            newStateUp->setCost(matrix[newX][newY]);
+            newStateUp->setCost(matrix[newX][newY].getCost());
             newPoint.pop_back();
             newPoint.pop_back();
-            states.push_back(newStateUp);
+            states.push_back(*newStateUp);
 
         }
 
@@ -125,8 +125,8 @@ public:
     virtual string getDirections(vector<State> path) {
         string directions;
         for (int i = 0; i <path.size() -1 ; ++i) {
-            vector<int> first = path[i];
-            vector<int> second = path[i+1];
+            vector<int> first = path[i].getState();
+            vector<int> second = path[i+1].getState();
             // check if up
             if(first[1] < second[1]){
                 directions = directions + "UP";
@@ -148,6 +148,8 @@ public:
         }
         return directions;
     }
+
+    virtual void InitlizeAllStates() = 0;
 
 
 };
