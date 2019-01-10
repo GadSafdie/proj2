@@ -24,6 +24,7 @@ public:
     State(T state) {
         this->state = state;
         this->cost = 0;
+        this->hasVisted=false;
     }
 
     bool operator==(State<T> other);
@@ -55,6 +56,16 @@ public:
     void setcameFrom(State<T>* pc) {
         camefrom = pc;
     }
+
+    bool getHasVisited() {
+        return hasVisted;
+    }
+
+    void setHasVisited(bool t) {
+        hasVisted=t;
+    }
+
+
 
 };
 

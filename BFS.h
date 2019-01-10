@@ -19,7 +19,10 @@ class BFS : public Searcher<string, T> {
 
 public:
     string search(Searchable<T> *searchable) {
-            this->popOpenList().
+          State<T> *root = searchable->getInitalState();
+          State<T> *goal = searchable->getGoalState();
+          root->
+
     }
 };
 
