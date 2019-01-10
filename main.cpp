@@ -1,6 +1,8 @@
+//#include "Main.h"
 #include <iostream>
-#include "Main.h"
 #include "State.h"
+#include "vector"
+#include "MatrixProblem.h"
 
 using namespace std;
 
@@ -19,20 +21,35 @@ int main(int argc, char *argv[]) {
 //    State<std::string>* goal = new State<std::string>("B");
 
     double input;
-    vector<vector<State<vector<int,int> >>> matrix;
+    vector<vector<State<vector<int>>>> matrix;
+
     for (int i = 0; i < 3; i++) {
-        vector<State<vector<int,int>>> myvector;
+        vector<State<vector<int>>> myvector;
         for (int j = 0; j < 3; j++) {
-            State<vector<int,int>> state;
-            state.getState().push_back(i,j);
-            cout << "Enter the number for Matrix 1"<<endl;
+            vector<int> point;
+            point.push_back(i);
+            point.push_back(j);
+            State<vector<int>>* state = new State<vector<int>>(&point);
             cin >> input;
-            state.setCost(input);
-            myvector.push_back(state);
+            state->setCost(input);
+            myvector.push_back(*state);
         }
         matrix.push_back(myvector);
     }
+    vector<int> p;
+    p.push_back(0);
+    p.push_back(0);
+    State<vector<int>>* root = new State<vector<int>>(&p);
+    p.clear();
+    p.push_back(2);
+    p.push_back(2);
+    State<vector<int>>* goal = new State<vector<int>>(&p);
 
+    MatrixProblem<vector<vector<State<vector<int>>*>>>* ma = new MatrixProblem<vector<vector<State<vector<int>> *>>>(matrix,root,goal);
+
+//    vector<State<vector<int>>> gad
+
+    cout<<"hello"<<endl;
 
 
 //    State<vector<int,int>>* root;

@@ -7,8 +7,6 @@
 
 
 #include "Server.h"
-#include "WriteFile.h"
-#include "MyTestClientHandler.h"
 #include "FileCacheManager.h"
 
 class MySerialServer : public server_side::Server{

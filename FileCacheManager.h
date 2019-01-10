@@ -5,8 +5,6 @@
 #ifndef PROJ2_FILECACHEMANAGER_H
 #define PROJ2_FILECACHEMANAGER_H
 
-#include <map>
-#include <vector>
 #include "CacheManager.h"
 #include "Solution.h"
 #include "Problem.h"

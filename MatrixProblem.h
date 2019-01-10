@@ -15,8 +15,6 @@ class MatrixProblem : public Searchable<T> {
     int horizonBound;
     int verticalBound;
 
-
-
 public:
 
     MatrixProblem(vector<vector<State<vector<int>> *>> matrix1, State<T> *root, State<T> *goal) {

@@ -6,7 +6,6 @@
 #define PROJ2_CLIENTHANDLER_H
 
 
-#include <fstream>
 
 class ClientHandler {
 
