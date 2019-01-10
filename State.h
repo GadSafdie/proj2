@@ -65,7 +65,9 @@ public:
         hasVisted=true;
     }
 
-
+    T getState(){
+        return state;
+    }
 
 };
 

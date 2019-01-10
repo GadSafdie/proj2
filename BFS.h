@@ -19,7 +19,7 @@ class BFS : public Searcher<string, T> {
 
 public:
     string search(Searchable<T> *searchable) {
-        string path = "";
+        vector<State<T>> path;
         unordered_set<State<T>> closed;
         State<T> *root = searchable->getInitalState();
         State<T> *goal = searchable->getGoalState();
@@ -32,7 +32,7 @@ public:
             State<T> *n = this->popOpenList();
             if (n == goal) {
                 closed.insert(goal);
-                path = this->backTrace(root, goal);
+                path = this->backTrace(goal);
                 break;
             }
 

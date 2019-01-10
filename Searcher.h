@@ -12,7 +12,6 @@
 #include "ISearcher.h"
 #include <iostream>
 #include <list>
-#include ""
 
 template<class S, class T>
 class Searcher : public ISearcher<S, T> {
