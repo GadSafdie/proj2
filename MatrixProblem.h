@@ -23,11 +23,11 @@ public:
         this->matrix = matrix1;
     }
 
-    virtual State* getInitalState() {
+    State* getInitalState() {
         return root;
     }
 
-    virtual State *getGoalState() {
+    State *getGoalState() {
         return goal;
     }
 
@@ -52,7 +52,7 @@ public:
 
     }
 
-    virtual vector<State> getAllPossibleStates(State *s) {
+    vector<State> getAllPossibleStates(State *s) {
         vector<State> states;
 
         vector<int> point = s->getState();
@@ -122,7 +122,7 @@ public:
 
     }
 
-    virtual string getDirections(vector<State> path) {
+    string getDirections(vector<State> path) {
         string directions;
         for (int i = 0; i <path.size() -1 ; ++i) {
             vector<int> first = path[i].getState();
@@ -149,7 +149,7 @@ public:
         return directions;
     }
 
-    virtual void InitlizeAllStates() = 0;
+    void InitlizeAllStates() {};
 
 
 };
