@@ -24,6 +24,14 @@ public:
 
     bool operator==(State<T> other);
 
+    State<T>* getCamefrom() {
+        return camefrom;
+    }
+
+    void setCamefrom(T camefrom) {
+        this->camefrom  =camefrom;
+    }
+
     double getCost() {
         return cost;
     }

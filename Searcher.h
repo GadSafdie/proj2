@@ -22,9 +22,9 @@ public:
         evaluatedNodes = 0;
     }
 
-    priority_queue<State<T>> getOpenList() {
-        return openList;
-    }
+//    priority_queue<State<T>> popOpenList() {
+//        return openList;
+//    }
 
 //    bool openListCOntains(){
 //        const_iterator find(const priority_queue<State<T>>&val) const
