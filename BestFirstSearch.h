@@ -10,9 +10,7 @@
 #include <vector>
 #include "Searcher.h"
 
-template<class T>
-
-
+template<class T
 class BestFirstSearch : public Searcher<string, T> {
 
 
@@ -25,7 +23,7 @@ public:
             State<T> n = this->popOpenList(); // inherited from Searcher, removes the best state
             closed.insert(n);
             if (n == (searchable->getGoalState()))
-                return backtrace(n); // private method, back traces through the parents
+                return backtrace(n); // priv ate method, back traces through the parents
                                     // calling the delegated method, returns a list of states with n as a parent
             list<State<T>> succerssors = searchable->getAllPossibleStates(n);
             typename list<State<T>>::iterator s;
