@@ -6,18 +6,16 @@
 #define PROJ2_MATRIXPROBLEM_H
 
 #include "Searchable.h"
-
-template<class T>
-class MatrixProblem : public Searchable<T> {
-    vector<vector<State<vector<int>> *>> matrix;
-    State<T> *root;
-    State<T> *goal;
+class MatrixProblem : public Searchable {
+    vector<vector<*State>> matrix;
+    State* root;
+    State* *goal;
     int horizonBound;
     int verticalBound;
 
 public:
 
-    MatrixProblem(vector<vector<State<vector<int>> *>> matrix1, State<T> *root, State<T> *goal) {
+    MatrixProblem(vector<vector<*State>> matrix1, State *root, State *goal) {
         this->root = root;
         this->goal = goal;
         this->horizonBound = matrix1.size() - 1;
@@ -25,11 +23,11 @@ public:
         this->matrix = matrix1;
     }
 
-    virtual State<T> *getInitalState() {
+    virtual State *getInitalState() {
         return root;
     }
 
-    virtual State<T> *getGoalState() {
+    virtual State *getGoalState() {
         return goal;
     }
 
@@ -46,7 +44,7 @@ public:
             return false;
         } else {
 //for -1 as minus infinite
-            if ((matrix[x][y]) >= 0) {
+            if ((matrix[x][y].getCost()) >= 0) {
                 return true;
             }
         }
@@ -54,7 +52,7 @@ public:
 
     }
 
-    virtual vector<State<T>> getAllPossibleStates(State<T> *s) {
+    virtual vector<State> getAllPossibleStates(State *s) {
         vector<State<T>> states;
 
         vector<int> point = s->getState();
@@ -70,7 +68,7 @@ public:
             newY = y;
             newPoint.push_back(newX);
             newPoint.push_back(newY);
-            auto newStateRight = new State<T>(newPoint);
+            auto newStateRight = new State(newPoint);
             newStateRight->setcameFrom(s);
             newStateRight->setCost(matrix[newX][newY]);
             newPoint.pop_back();
@@ -83,7 +81,7 @@ public:
             newY = y + 1;
             newPoint.push_back(newX);
             newPoint.push_back(newY);
-            auto newStateDown = new State<T>(newPoint);
+            auto newStateDown = new State(newPoint);
             newStateDown->setcameFrom(s);
             newStateDown->setCost(matrix[newX][newY]);
             newPoint.pop_back();
@@ -96,7 +94,7 @@ public:
             newY = y;
             newPoint.push_back(newX);
             newPoint.push_back(newY);
-            auto newStateLeft = new State<T>(newPoint);
+            auto newStateLeft = new State(newPoint);
             newStateLeft->setcameFrom(s);
             newStateLeft->setCost(matrix[newX][newY]);
             newPoint.pop_back();
@@ -110,7 +108,7 @@ public:
             newY = y;
             newPoint.push_back(newX);
             newPoint.push_back(newY);
-            auto newStateUp = new State<T>(newPoint);
+            auto newStateUp = new State(newPoint);
             newStateUp->setcameFrom(s);
             newStateUp->setCost(matrix[newX][newY]);
             newPoint.pop_back();
@@ -124,7 +122,7 @@ public:
 
     }
 
-    virtual string getDirections(vector<State<T>> path) {
+    virtual string getDirections(vector<State> path) {
         string directions;
         for (int i = 0; i <path.size() -1 ; ++i) {
             vector<int> first = path[i];

@@ -7,20 +7,19 @@
 
 #include "State.h"
 #include "vector"
-template <class T>
 
 class Searchable {
 public:
 
-    virtual State <T> getInitalState() = 0;
+    virtual State  getInitalState() = 0;
 
-    virtual State<T> getGoalState() = 0;
+    virtual State getGoalState() = 0;
 
-    virtual vector<State<T>>getAllPossibleStates(State<T> s) = 0;
+    virtual vector<State>getAllPossibleStates(State s) = 0;
 
     virtual void InitlizeAllStates() = 0;
 
-    virtual string getDirections(vector<State<T>> path) = 0;
+    virtual string getDirections(vector<State> path) = 0;
 
 };
 

@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     p.push_back(2);
     State<vector<int>>* goal = new State<vector<int>>(&p);
 
-    MatrixProblem<vector<vector<State<vector<int>>*>>>* ma = new MatrixProblem<vector<vector<State<vector<int>> *>>>(matrix,root,goal);
+    MatrixProblem<vector<int>>* ma = new MatrixProblem<vector<int>>(matrix,root,goal);
 
 //    vector<State<vector<int>>> gad
 
