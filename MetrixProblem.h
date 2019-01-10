@@ -125,7 +125,30 @@ public:
     }
 
     virtual string getDirections(vector<State<T>> path) {
-
+        string directions;
+        for (int i = 0; i <path.size() -1 ; ++i) {
+            vector<int> first = path[i];
+            vector<int> second = path[i+1];
+            // check if up
+            if(first[1] < second[1]){
+                directions = directions + "UP";
+            }
+                // check if down
+            else if(first[1] > second[1]){
+                directions = directions + "DOWN";
+            }
+                // check if right
+            else if(first[0] < second[0]){
+                directions = directions + "RIGHT";
+            }
+                // check if left
+            else if(first[0] > second[0]){
+                directions = directions + "LEFT";
+            }
+            if(i != path.size() -2)
+                directions = directions + ",";
+        }
+        return directions;
     }
 
 
