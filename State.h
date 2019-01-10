@@ -30,10 +30,6 @@ public:
         return camefrom;
     }
 
-    void setCamefrom(T camefrom) {
-        this->camefrom  =camefrom;
-    }
-
     double getCost() {
         return cost;
     }
