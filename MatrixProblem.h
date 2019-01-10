@@ -7,7 +7,7 @@
 
 #include "Searchable.h"
 class MatrixProblem : public Searchable {
-    vector<vector<*State>> matrix;
+    vector<vector<State>> matrix;
     State* root;
     State* *goal;
     int horizonBound;
@@ -15,7 +15,7 @@ class MatrixProblem : public Searchable {
 
 public:
 
-    MatrixProblem(vector<vector<*State>> matrix1, State *root, State *goal) {
+    MatrixProblem(vector<vector<State>> matrix1, State *root, State *goal) {
         this->root = root;
         this->goal = goal;
         this->horizonBound = matrix1.size() - 1;
@@ -23,7 +23,7 @@ public:
         this->matrix = matrix1;
     }
 
-    virtual State *getInitalState() {
+    virtual State* getInitalState() {
         return root;
     }
 
