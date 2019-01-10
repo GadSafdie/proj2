@@ -27,27 +27,27 @@ public:
 
 protected:
 
-    priority_queue<State<T>> getOpenList(){
+    priority_queue<State <T>> getOpenList() {
         return openList;
     }
 
 
-    State<T> popOpenList() {
+    State <T> popOpenList() {
         evaluatedNodes++;
         return openList.pop();
     }
 
-    void pushToOpenList(State<T>* newSate){
+    void pushToOpenList(State <T> *newSate) {
         openList.push(newSate);
     }
 
-    bool contains(State<T>* check){
+    bool contains(State<T> *check) {
         bool stateCon = false;
-        vector<State <T>> temp;
+        vector<State<T>> temp;
         // check if s is in the queue by pop all the elements
-        while(!this->pq.empty()){
+        while (!this->pq.empty()) {
             State<T> var = this->popFromthePq();
-            if(var == check){
+            if (var == check) {
                 stateCon = true;
                 break;
             }
@@ -55,46 +55,44 @@ protected:
         }
         // put back the elements to the original queue
 
-        for(int i = 0 ; i <temp.size();i++ ){
+        for (int i = 0; i < temp.size(); i++) {
             this->pushToOpenList(temp[i]);
         }
-cout<<"gad"<<endl;
         return stateCon;
 
     }
 
 
-    void updatePriority(State<T>* check){
-        vector<State <T>> temp;
+    void updatePriority(State<T> *check) {
+        vector<State<T>> temp;
         // check if s is in the queue by pop all the elements
-        while(!this->pq.empty()){
+        while (!this->pq.empty()) {
             State<T> var = this->popFromthePq();
-            if(var == check){
+            if (var == check) {
                 temp.push_back(check); // change the state in the new one
-            } else{
+            } else {
                 temp.push_back(var); // add the other states
             }
         }
         // put back the elements to the original queue
-        for(int i = 0 ; i <temp.size();i++){
+        for (int i = 0; i < temp.size(); i++) {
             this->pushToOpenList(temp[i]);
         }
     }
 
 
-    vector<State<T>*>backtrace(State<T>* goal){
-        vector<State<T>*> path;
+    vector<State<T> *> backtrace(State<T> *goal) {
+        vector<State<T> *> path;
         path.push_back(goal);
 
-        while(goal->getCamefrom()!= NULL){
+        while (goal->getCamefrom() != NULL) {
             State<T> *dad = goal->getCamefrom();
             path.push_back(dad);
             goal = dad;
         }
-        reverse(path.begin(),path.end());
+        reverse(path.begin(), path.end());
         return path;
     }
-
 
 
 };
