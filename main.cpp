@@ -14,9 +14,9 @@ int main(int argc, char *argv[]) {
 //    while (true){}
 
 
-    State<std::string>* a = new State<std::string>("A");
-    State<std::string>* b = new State<std::string>("B");
-    State<std::string>* goal = new State<std::string>("B");
+//    State<std::string>* a = new State<std::string>("A");
+//    State<std::string>* b = new State<std::string>("B");
+//    State<std::string>* goal = new State<std::string>("B");
 
     double input;
     vector<vector<State<vector<int,int> >>> matrix;
@@ -34,8 +34,9 @@ int main(int argc, char *argv[]) {
     }
 
 
-    State<vector<int,int>>* root;
-    State<T>* goal;
+
+//    State<vector<int,int>>* root;
+//    State<T>* goal;
 
 
 
