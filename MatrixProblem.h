@@ -9,7 +9,7 @@
 class MatrixProblem : public Searchable {
     vector<vector<State>> matrix;
     State* root;
-    State* *goal;
+    State* goal;
     int horizonBound;
     int verticalBound;
 
