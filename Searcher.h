@@ -58,7 +58,7 @@ protected:
         for(int i = 0 ; i <temp.size();i++ ){
             this->pushToOpenList(temp[i]);
         }
-
+cout<<"gad"<<endl;
         return stateCon;
 
     }
