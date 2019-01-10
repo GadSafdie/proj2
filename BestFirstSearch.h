@@ -20,7 +20,7 @@ public:
         unordered_set<State<T>> closed;
 
         while (this->OpenListSize > 0) {
-            State<T> n = this->getOpenList(); // inherited from Searcher, removes the best state
+            State<T> n = this->popOpenList(); // inherited from Searcher, removes the best state
             closed.Add(n);
             if (n == (searchable->getIGoallState()))
                 return backTrace(); // private method, back traces through the parents
@@ -29,9 +29,13 @@ public:
             list<State<T>> succerssors = searchable->getAllPossibleStates(n);
             typename list<State<T>>::iterator s;
             for (s = succerssors.begin(); s != succerssors.end(); ++s) {
+                double currPath = n.getpathCost() + *s->getCost();
                 if (!(closed.find(*s)) && !(this->openListCOntains(*s))) {
-                    addToOpenList(s);
+                    *s->setcameFrom(n);
+                    *s->setpathCost(currPath);
+                    addToOpenList(*s);
                 } else {
+
 
                 }
 

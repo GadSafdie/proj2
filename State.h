@@ -14,7 +14,9 @@ template<class T>
 class State {
     T state;
     double cost;
-    State<T> camefrom;
+    State<T>* camefrom;
+    double pathCost;
+
 
 public:
     State(T state) {
@@ -36,10 +38,25 @@ public:
         return cost;
     }
 
-    double setCost() {
-        return cost;
+    void setCost(double c) {
+        cost = c;
     }
 
+    double getpathCost() {
+        return pathCost;
+    }
+
+    void setpathCost(double pc) {
+        pathCost = pc;
+    }
+
+    State<T>* getcameFrom() {
+        return camefrom;
+    }
+
+    void setcameFrom(State<T>* pc) {
+        camefrom = pc;
+    }
 
 };
 
