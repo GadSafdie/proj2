@@ -30,9 +30,11 @@ public:
             State<T> *n = this->popOpenList();
             if (n->getState() == goal->getState()) {
                 closed.insert(goal);
+//                cout << n->getCost() << " ";
                 path = searchable->backtrace(n);
                 break;
             }
+//            cout << n->getCost() << " ";
             this->evaluatedNodes++;
             vector<State<T>*> successors = searchable->getAllPossibleStates(n);
             it = successors.begin();
@@ -41,12 +43,8 @@ public:
                     this->pushToOpenList(*it);
                 }
             }
-        for (int i = 0; i < path.size() ; ++i) {
-            cout<<
-        }
         string newPath = searchable->getDirections(path);
         return newPath;
-
 
     }
 };

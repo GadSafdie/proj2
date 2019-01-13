@@ -29,23 +29,21 @@ public:
         {
             current = stack.top();
             stack.pop();
-
+//            cout<<current->getCost()<< "";
             this->evaluatedNodes+=1;
 
             if(current->getState() == goal->getState()){
+//                cout<<current->getCost()<< "";
                 break;
             }
 
-            // Stack may contain same vertex twice. So
-            // we need to print the popped item only
-            // if it is not visited.
             if (!current->getHasVisited())
             {
                 current->setHasVisited();
             }
-            vector<State<T>*> canGo = searchable->getAllPossibleStates(current);
-            it = canGo.begin();
-            for(; it!= canGo.end() ;++it){
+            vector<State<T>*> checkIfCanGo = searchable->getAllPossibleStates(current);
+            it = checkIfCanGo.begin();
+            for(; it!= checkIfCanGo.end() ;++it){
                 State<T>* temp = *it;
                     temp->setcameFrom(current);
                     stack.push(temp);

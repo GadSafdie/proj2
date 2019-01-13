@@ -44,13 +44,13 @@ int main(int argc, char *argv[]) {
     p.push_back(0);
     State<vector<int>>* root = new State<vector<int>>(p,1);
     p.clear();
-    p.push_back(1);
     p.push_back(2);
-    State<vector<int>>* goal = new State<vector<int>>(p,2);
+    p.push_back(2);
+    State<vector<int>>* goal = new State<vector<int>>(p,9);
 
     Searchable<vector<int>>* ma = new MatrixProblem(matrix,root,goal);
 
-   ISearcher<vector<int>>* one = new BFS<vector<int>>();
+   ISearcher<vector<int>>* one = new DFS<vector<int>>();
    string h = one->search(ma);
 
 
