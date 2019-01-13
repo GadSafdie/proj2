@@ -44,6 +44,9 @@ public:
                 }
             }
         string newPath = searchable->getDirections(path);
+        if(newPath == ""){
+            newPath = "-1";
+        }
         return newPath;
 
     }

@@ -52,6 +52,9 @@ public:
             }
         }
         string solution = searchable->getDirections(path);
+        if(solution == ""){
+            solution = "-1";
+        }
         return solution;
     }
 
