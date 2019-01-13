@@ -22,7 +22,7 @@ public:
 
     virtual vector<State<vector<int>> *> getAllPossibleStates(State<vector<int>> *s) override;
 
-    virtual string getDirections(vector<vector<int>> path) override;
+    virtual string getDirections(vector<State<vector<int>>*> path) override;
 
 };
 

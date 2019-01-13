@@ -7,6 +7,8 @@
 
 #include "State.h"
 #include <vector>
+#include <algorithm>
+
 template <class T>
 
 class Searchable {
@@ -31,7 +33,27 @@ public:
 
     virtual vector<State<T>*>getAllPossibleStates(State<T>* s) = 0;
 
-    virtual string getDirections(vector<T> path) = 0;
+    virtual string getDirections(vector<State<T>*> path) = 0;
+
+
+    vector<State<T>*> backtrace(State<T>* g) {
+        vector<State<T>*> path;
+        path.push_back(g);
+
+        while(g->getCamefrom()!= NULL){
+            State<T> *dad = g->getCamefrom();
+
+            path.push_back(dad);
+            g = dad;
+        }
+
+        reverse(path.begin(),path.end());
+        return path;
+    }
+
+
+
+
 
 };
 

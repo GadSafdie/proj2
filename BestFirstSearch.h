@@ -12,38 +12,50 @@
 template<class T>
 class BestFirstSearch : public Searcher<T> {
 
+
 public:
 
     string search(Searchable<T> *searchable) { // Searcher's abstract method overriding
-        this->pushToOpenList(searchable->getInitalState()); // inherited from Searcher
+        this->openList.push(searchable->getInitalState());// inherited from Searcher
+        searchable->getInitalState()->setHasVisited();
+        vector<State<T>*> path;
         unordered_set<State<T>*> closed;
-
         while (this->getOpenList().size() > 0) {
+
             State<T>* n = this->popOpenList(); // inherited from Searcher, removes the best state
             closed.insert(n);
-            if (n == (searchable->getGoalState()))
-                return this->backtrace(searchable->getGoalState()); // private method, back traces through the parents
-            ///GOING BACK FROM GOAL TO THE FIRDT
+            State<T>* goal = searchable->getGoalState();
+            if (n->getState() == goal->getState()){
+                path = searchable->backtrace(n);
+                break;
+            }
+            this->evaluatedNodes++;
 // calling the delegated method, returns a list of states with n as a parent
-            list<State<T>> succerssors = searchable->getAllPossibleStates(n);
-            typename list<State<T>>::iterator s;
-            for (s = succerssors.begin(); s != succerssors.end(); ++s) {
-                double currPath = n->getpathCost() + *s->getCost();
-                if (!(closed.find(*s)) && !(this->contains(*s))) {
-                    *s->setcameFrom(n);
-                    *s->setpathCost(currPath);
-                    this->pushToOpenList(*s);
-                } else if (currPath < *s->getpathCost()) {
-                    if (!this->contains(*s)) {
-                        this->pushToOpenList(*s);
+            vector<State<T>*> succerssors = searchable->getAllPossibleStates(n);
+            std::list<State<T>*> myList(succerssors.begin(), succerssors.end());
+            typename list<State<T>*>::iterator s;
+            for (s = myList.begin(); s != myList.end(); ++s) {
+                State<T>* temp = *s;
+                double currPath = n->getpathCost() + temp->getCost();
+                const bool is_in = closed.find(temp) != closed.end();
+                if ((is_in == false) && !(this->contains(temp))) {
+                    temp->setcameFrom(n);
+                    temp->setpathCost(currPath);
+                    this->pushToOpenList(temp);
+                } else if (currPath < temp->getpathCost()) {
+                    if (!this->contains(temp)) {
+                        this->openList.push(temp);
                     } else {
-                        this->updatePriority(*s);
+                        this->updatePriority(temp,n);
                     }
                 }
             }
         }
-
+        string solution = searchable->getDirections(path);
+        return solution;
     }
+
+
 
 
 

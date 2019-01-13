@@ -18,36 +18,35 @@ class BFS : public Searcher<T> {
 
 public:
     string search(Searchable<T> *searchable) {
-        vector<State<T>> path;
-        unordered_set<State<T>> closed;
-        State<T> *root = searchable->getInitalState();
+        vector<State<T>*> path;
+        unordered_set<State<T>*> closed;
         State<T> *goal = searchable->getGoalState();
-        root->setHasVisited();
-        this->pushToOpenList(root);
+        this->pushToOpenList(searchable->getInitalState());
+        searchable->getInitalState()->setHasVisited();
 
         typename vector<State<T> *>::iterator it;
 
         while (!this->getOpenList().empty()) {
             State<T> *n = this->popOpenList();
-            if (n == goal) {
+            if (n->getState() == goal->getState()) {
                 closed.insert(goal);
-                path = this->backTrace(goal);
+                path = searchable->backtrace(n);
                 break;
             }
-
-            vector<State<T>> successors = searchable->getAllPossibleStates(root);
+            this->evaluatedNodes++;
+            vector<State<T>*> successors = searchable->getAllPossibleStates(n);
             it = successors.begin();
             for (; it != successors.end(); ++it) {
-                if ((*it)->getHasVisited() == false) {
                     (*it)->setcameFrom(n);
-                    this->pushToOpenList(n);
-                    (*it)->setHasVisited();
+                    this->pushToOpenList(*it);
                 }
             }
+        for (int i = 0; i < path.size() ; ++i) {
+            cout<<
         }
-
-        string newPath = searchable->getDirections;
+        string newPath = searchable->getDirections(path);
         return newPath;
+
 
     }
 };

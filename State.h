@@ -21,7 +21,7 @@ class State {
 
 
 public:
-    State<T>(T state, double cost) : state(state), cost(cost), pathCost(cost),hasVisted(false), camefrom(nullptr) {}
+    State<T>(T state, double c) : state(state), cost(c), hasVisted(false), camefrom(nullptr) {}
 
     State<T>(){}
 
@@ -64,6 +64,23 @@ public:
         return state;
     }
 
+    T setState(T* s){
+        state = s;
+    }
+
+    bool operator < (const State<T>* &b) const{
+        return this->PathCost < b->PathCost;
+    }
+    bool operator >(const State<T>* &b) const{
+        return this->PathCost > b->PathCost;
+    }
+    bool operator == (const State<T>* &b) const{
+        return this->PathCost == b->PathCost;
+    }
+
+    bool operator()(const State<T>* left , const State<T>* right){
+        return left->getPathCost()>right->getPathCost();
+    }
 
 };
 

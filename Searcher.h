@@ -13,36 +13,45 @@
 #include <iostream>
 #include <list>
 
+
+
+
 template<class T>
 class Searcher : public ISearcher<T> {
+    class Compere {
+    public:
+        bool operator()(State<T>* left, State<T>* right) {
+            return (left->getpathCost()) > (right->getpathCost());
+        }
+    };
+
 protected:
-    priority_queue<State<T>> openList;
+    priority_queue<State<T>*, vector<State<T>*>, Compere> openList;
     int evaluatedNodes;
 
 public:
 
-
-    priority_queue<State <T>> getOpenList() {
+    priority_queue<State<T>*, vector<State<T>*>,Compere> getOpenList() {
         return openList;
     }
 
 
     State<T>* popOpenList() {
-        evaluatedNodes++;
-        State<T>* s = openList.pop();
+        State<T>* s = openList.top();
+        openList.pop();
         return s;
     }
 
     void pushToOpenList(State <T> *newSate) {
-        openList.push(newSate);
+       openList.push(newSate);
     }
 
     bool contains(State<T> *check) {
         bool stateCon = false;
-        vector<State<T>> temp;
+        vector<State<T>*> temp;
         // check if s is in the queue by pop all the elements
         while (!this->openList.empty()) {
-            State<T> var = this->popFromthePq();
+            State<T>* var = this->popOpenList();
             if (var == check) {
                 stateCon = true;
                 break;
@@ -55,39 +64,24 @@ public:
             this->pushToOpenList(temp[i]);
         }
         return stateCon;
-
     }
 
-
-    void updatePriority(State<T> *check) {
-        vector<State<T>> temp;
-        // check if s is in the queue by pop all the elements
-        while (!this->openList.empty()) {
-            State<T> var = this->popFromthePq();
-            if (var == check) {
-                temp.push_back(check); // change the state in the new one
-            } else {
-                temp.push_back(var); // add the other states
+    void updatePriority(State<T> *current,State<T> *update) {
+        double cost;
+        vector<State<T>*> temp;
+        while (!this->openList.empty()){
+            State<T>* top = this->popOpenList();
+            temp.push_back(top);
+            if(current == top){
+                top->setcameFrom(update);
+                cost = update->getpathCost()+current->getCost();
+                top->setpathCost(cost);
+                break;
             }
         }
-        // put back the elements to the original queue
-        for (int i = 0; i < temp.size(); i++) {
-            this->pushToOpenList(temp[i]);
+        for(int i = 0 ; i<temp.size();i++){
+            this->openList.push(temp[i]);
         }
-    }
-
-
-    vector<State<T> *> backtrace(State<T> *goal) {
-        vector<State<T> *> path;
-        path.push_back(goal);
-
-        while (goal->getCamefrom() != NULL) {
-            State<T> *dad = goal->getCamefrom();
-            path.push_back(dad);
-            goal = dad;
-        }
-        reverse(path.begin(), path.end());
-        return path;
     }
 
     virtual string search(Searchable<T> *searchable) = 0;

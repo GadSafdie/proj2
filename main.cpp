@@ -5,6 +5,7 @@
 #include "MatrixProblem.h"
 #include "BFS.h"
 #include "BestFirstSearch.h"
+#include "DFS.h"
 
 using namespace std;
 
@@ -41,22 +42,22 @@ int main(int argc, char *argv[]) {
     vector<int> p;
     p.push_back(0);
     p.push_back(0);
-    State<vector<int>>* root = new State<vector<int>>(p,7);
+    State<vector<int>>* root = new State<vector<int>>(p,1);
     p.clear();
+    p.push_back(1);
     p.push_back(2);
-    p.push_back(2);
-    State<vector<int>>* goal = new State<vector<int>>(p,8);
+    State<vector<int>>* goal = new State<vector<int>>(p,2);
 
     Searchable<vector<int>>* ma = new MatrixProblem(matrix,root,goal);
 
-   ISearcher<vector<int>>* one = new BestFirstSearch<vector<int>>();
-   one->search(ma);
+   ISearcher<vector<int>>* one = new BFS<vector<int>>();
+   string h = one->search(ma);
 
 
 
 //    vector<State<vector<int>>> gad
 
-    cout<<"hello"<<endl;
+    cout<<h<<endl;
 
 
 //    State<vector<int,int>>* root;
