@@ -43,19 +43,19 @@ string MatrixProblem::getDirections(vector<State<vector<int>>*> path) {
     for (int i = 0; i < path.size() - 1; ++i) {
         vector<int> first = path[i]->getState();
         vector<int> second = path[i + 1]->getState();
-         // check if up
+        // check if up
         if (first[1] < second[1]) {
             directions = directions + "DOWN";
         }
-         // check if down
+            // check if down
         else if (first[1] > second[1]) {
             directions = directions + "UP";
         }
-         // check if right
+            // check if right
         else if (first[0] < second[0]) {
             directions = directions + "RIGHT";
         }
-          // check if left
+            // check if left
         else if (first[0] > second[0]) {
             directions = directions + "LEFT";
         }
@@ -75,14 +75,13 @@ vector<State<vector<int>> *> MatrixProblem:: getAllPossibleStates(State<vector<i
     int y=point[1];
 
     int newX;
-    int x1;
     int newY;
     vector<int> newPoint;
 
     if (canWeStepThere(x + 1, y)) {
         if(matrix[x+1][y]->getHasVisited() == false){
-           matrix[x+1][y]->setHasVisited();
-           states.push_back(matrix[x+1][y]);
+            matrix[x+1][y]->setHasVisited();
+            states.push_back(matrix[x+1][y]);
         }
 //        newX = x + 1;
 //        newY = y;
