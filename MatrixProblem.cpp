@@ -75,6 +75,7 @@ vector<State<vector<int>> *> MatrixProblem:: getAllPossibleStates(State<vector<i
     int y=point[1];
 
     int newX;
+    int x1;
     int newY;
     vector<int> newPoint;
 
