@@ -18,11 +18,11 @@ namespace boot {
 class boot::Main {
 public:
     void main(int port){
-        StringReverser sr;
-        FileCacheManager<string,string> fcm;
-        auto c = new MyTestClientHandler(sr,fcm);
-        auto mySerialServer = new MySerialServer();
-        mySerialServer->open(port,c);
+//        StringReverser sr;
+//        FileCacheManager<string,string> fcm;
+//        auto c = new MyTestClientHandler(sr,fcm);
+//        auto mySerialServer = new MySerialServer();
+//        mySerialServer->open(port,c);
     }
 };
 

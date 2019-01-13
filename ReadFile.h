@@ -4,20 +4,24 @@
 
 #ifndef PROJ2_READFILE_H
 #define PROJ2_READFILE_H
-#include <unistd.h>
-#include <cstring>
+
+#include "MatrixProblem.h"
+#include "State.h"
+
 #include <iostream>
-#include <sys/socket.h>
-#include <error.h>
+#include <fstream>
+#include "ReadFile.h"
+#include "vector"
 #include <map>
+
 
 using namespace std;
 
 class ReadFile {
 
 public:
+    map<MatrixProblem*, string> ReadFileCacheManager();
 
-    map<string,string> ReadFileCacheManager();
 
 //    Employee *getEmployee(string id, list<Employee *> le);
 
@@ -38,8 +42,7 @@ public:
 //    list <MyCrewList*> ReadFileAvCrew ();
 
 
-};
-
+    };
 
 
 #endif //PROJ2_READFILE_H

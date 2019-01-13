@@ -10,8 +10,8 @@ MatrixProblem::MatrixProblem(vector<vector<State<vector<int>> *>> matrix1, State
     this->matrix = matrix1;
     this->root = root;
     this->goal = goal;
-    this->horizonBound = matrix1.size() - 1;
-    this->verticalBound = matrix1[0].size() - 1;
+    this->horizonBound = matrix1[0].size() - 1;
+    this->verticalBound = matrix1.size() - 1;
     vector<int> p = root->getState();
     matrix[p[0]][p[1]]->setHasVisited();
 }
@@ -45,19 +45,19 @@ string MatrixProblem::getDirections(vector<State<vector<int>>*> path) {
         vector<int> second = path[i + 1]->getState();
         // check if up
         if (first[1] < second[1]) {
-            directions = directions + "DOWN";
+            directions = directions + "RIGHT";
         }
             // check if down
         else if (first[1] > second[1]) {
-            directions = directions + "UP";
+            directions = directions + "LEFT";
         }
             // check if right
         else if (first[0] < second[0]) {
-            directions = directions + "RIGHT";
+            directions = directions + "DOWN";
         }
             // check if left
         else if (first[0] > second[0]) {
-            directions = directions + "LEFT";
+            directions = directions + "UP";
         }
         if (i != path.size() - 2)
             directions = directions + ",";
