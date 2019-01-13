@@ -24,6 +24,8 @@ public:
 
     virtual string getDirections(vector<State<vector<int>>*> path) override;
 
+    friend ostream & operator << (ostream &out, const MatrixProblem &c);
+
 };
 
 

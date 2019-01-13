@@ -9,7 +9,9 @@
 #include <cstring>
 #include <sys/socket.h>
 #include <error.h>
+#include <map>
 #include "string"
+#include "MatrixProblem.h"
 
 using namespace std;
 
@@ -28,7 +30,7 @@ public:
 //
 //    void writeNewMyPlaneList(MyPlaneList *mpl);
 
-    void writeFileCacheManager(string first, string second);
+    void writeFileCacheManager(MatrixProblem* first, string second);
 };
 
 

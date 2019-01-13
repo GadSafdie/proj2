@@ -8,14 +8,17 @@
 #include <string>
 #include <cstdlib>
 #include "string.h"
+#include "MatrixProblem.h"
 #include <fstream>
+#include <map>
 
 using namespace std;
 
 
-void WriteFile::writeFileCacheManager(string first, string second) {
+void WriteFile::writeFileCacheManager(MatrixProblem* first, string second) {
     ofstream myfile;
-    myfile.open("RFCM.txt", ofstream::app);
-    myfile << first << "$" << second << '\n';
+    myfile.open("info.txt", ofstream::app);
+    myfile << first <<'\n';
+    myfile << second << '\n';
     myfile.close();
 }

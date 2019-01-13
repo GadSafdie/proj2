@@ -161,3 +161,10 @@ vector<State<vector<int>> *> MatrixProblem:: getAllPossibleStates(State<vector<i
 
     return states;
 }
+
+ostream &operator<<(ostream &out, const MatrixProblem &c) {
+
+
+    return <#initializer#>;
+}
+

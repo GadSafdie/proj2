@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
    string h = one->search(ma);
    int x = one->getNumberOfNodesEvaluated();
     int y = ma->getGoalState()->getpathCost();
+//gad is beautiful
 
 
 //    vector<State<vector<int>>> gad
