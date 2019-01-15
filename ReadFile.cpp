@@ -118,8 +118,8 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
 
                         point.clear();
                         ////change
-                        point.push_back(std::stoi(second));
-                        point.push_back(std::stoi(first));
+//                        point.push_back(std::stoi(second));
+//                        point.push_back(std::stoi(first));
                         ////change
                         if (counter == 0) {
                             root = matrix[std::stoi(first)][std::stoi(second)];
@@ -146,21 +146,17 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
                 if (counter == 3) {
                     flagDimension = 0;
                     returnn.insert(std::make_pair(matrixProblem, solution));
-//                    flagDimension = 0;
                     lineCounter = 0;
-//                    MatrixProblem *matrixProblem;
-
-//                    flag = 0;
-//                    matrixFlag = 1;
-//                    point.clear();
-//                    cost = "";
-//                    first = "";
-//                    second = "";
-//                    solution = "";
-//                    x = 0;
-//                    dataFlag = 0;
-//                    counter = 0;
-//                    flag11 = 0;
+                    flag = 0;
+                    matrixFlag = 1;
+                    point.clear();
+                    cost = "";
+                    first = "";
+                    second = "";
+                    solution = "";
+                    x = 0;
+                    counter = 0;
+                    flag11 = 0;
                     matrix.clear();
                 }
 //                }

@@ -47,6 +47,7 @@ int main(int argc, char *argv[]) {
     // show content:
     for (std::map<MatrixProblem *, string>::iterator it = myMap.begin(); it != myMap.end(); ++it){
         rrr = it->first;
+        gadi = it->second;
     }
     hezi->writeFileCacheManager(rrr, gadi);
     if(*ma == *rrr){
