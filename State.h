@@ -64,6 +64,14 @@ public:
         return state;
     }
 
+    int getNumRow(){
+        return state[0];
+    }
+
+    int getNumCol(){
+        return state[1];
+    }
+
     T setState(T* s){
         state = s;
     }

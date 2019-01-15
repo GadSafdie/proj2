@@ -7,6 +7,9 @@
 #include "BestFirstSearch.h"
 #include "DFS.h"
 #include "ReadFile.h"
+#include "Astar.h"
+#include "WriteFile.h"
+
 
 using namespace std;
 
@@ -24,30 +27,37 @@ int main(int argc, char *argv[]) {
 //    State<std::string>* b = new State<std::string>("B");
 //    State<std::string>* goal = new State<std::string>("B");
 
-    ReadFile* readFile;
+    ReadFile *readFile;
     map<MatrixProblem *, string> myMap;
-    myMap =readFile->ReadFileCacheManager();
+    myMap = readFile->ReadFileCacheManager();
 
-    cout<<"gad"<<endl;
+    cout << "gad" << endl;
 
-    Searchable<vector<int>>* ma = myMap.begin()->first;
-    ISearcher<vector<int>>* one = new DFS<vector<int>>();
+    MatrixProblem *ma = myMap.begin()->first;
+    ISearcher<vector<int>> *one = new AStar<vector<int>>();
 
-   string h = one->search(ma);
-   int x = one->getNumberOfNodesEvaluated();
+    string h = one->search(ma);
+    int x = one->getNumberOfNodesEvaluated();
     int y = ma->getGoalState()->getpathCost();
-//gad is beautiful
 
-
-//    vector<State<vector<int>>> gad
+    string gadi = myMap.find(ma)->second;
+    WriteFile *hezi = new WriteFile();
+    hezi->writeFileCacheManager(ma, gadi);
+    MatrixProblem *rrr;
+    // show content:
+    for (std::map<MatrixProblem *, string>::iterator it = myMap.begin(); it != myMap.end(); ++it){
+        rrr = it->first;
+    }
+    hezi->writeFileCacheManager(rrr, gadi);
+    if(*ma == *rrr){
+        cout<<"ennnn"<<endl;
+    }
 
     cout<<x<<endl;
     cout<<y<<endl;
     cout<<h<<endl;
 
 
-//    State<vector<int,int>>* root;
-//    State<T>* goal;
 
 
 

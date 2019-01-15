@@ -32,7 +32,7 @@ void MyParallelServer::exit11(ClientHandler *clientHandler) {
 //        second = iterator->second;
 //        write->writeFileCacheManager(first,second);
 //    }
-    fileCacheManager->exit();
+//    fileCacheManager->exit();
 
 }
 

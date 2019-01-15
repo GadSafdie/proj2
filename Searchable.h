@@ -33,6 +33,9 @@ public:
 
     virtual vector<State<T>*>getAllPossibleStates(State<T>* s) = 0;
 
+    virtual vector<State<T>*>getAllPossibleStatesAstar(State<T>* s) = 0;
+
+
     virtual string getDirections(vector<State<T>*> path) = 0;
 
 

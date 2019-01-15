@@ -11,7 +11,6 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
     map<MatrixProblem *, string> returnn;
     State<vector<int>> *root;
     State<vector<int>> *goal;
-    State<vector<int>> *temp;
     std::ifstream infile("info.txt");
     int flagDimension = 0;
     int lineCounter = 0;
@@ -27,12 +26,11 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
     int dataFlag = 0;
     int counter = 0;
     int flag11 = 0;
-    MatrixProblem *matrixProblem;
-
 
     if (infile.is_open()) {
         std::string line;
         while (getline(infile, line)) {
+//            if(line != "\r") {
             if (flagDimension == 0) {
                 flag = 0;
                 for (int i = 0; i < line.length(); ++i) {
@@ -63,8 +61,8 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
                         point.push_back(lineCounter);
                         point.push_back(x);
                         //change
-                        temp = new State<vector<int>>(point, stod(cost));
-                        newLine.push_back(temp);
+                        State<vector<int>> *temp1 = new State<vector<int>>(point, stod(cost));
+                        newLine.push_back(temp1);
                         point.clear();
                         cost = "";
                         x = x + 1;
@@ -74,19 +72,20 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
                 point.push_back(lineCounter);
                 point.push_back(x);
                 ////change
-                temp = new State<vector<int>>(point, stod(cost));
+                State<vector<int>> *temp = new State<vector<int>>(point, stod(cost));
                 newLine.push_back(temp);
                 point.clear();
                 cost = "";
-                x = x + 1;
+//                x = x + 1;
                 lineCounter++;
                 matrix.push_back(newLine);
-                x=0;
+                x = 0;
                 newLine.clear();
                 if (lineCounter - 1 == dimension[0]) {
                     matrixFlag = 0;
                 }
             } else {
+                MatrixProblem *matrixProblem;
                 if (flag11 == 0) {
                     if ((counter == 1) || (counter == 0)) {
                         if (counter == 0) {
@@ -113,7 +112,6 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
                                     }
                                 } else {
                                     second = second + line[i];
-
                                 }
                             }
                         }
@@ -149,7 +147,9 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
                     flagDimension = 0;
                     returnn.insert(std::make_pair(matrixProblem, solution));
 //                    flagDimension = 0;
-//                    lineCounter = 0;
+                    lineCounter = 0;
+//                    MatrixProblem *matrixProblem;
+
 //                    flag = 0;
 //                    matrixFlag = 1;
 //                    point.clear();
@@ -161,7 +161,9 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
 //                    dataFlag = 0;
 //                    counter = 0;
 //                    flag11 = 0;
+                    matrix.clear();
                 }
+//                }
             }
         }
     }

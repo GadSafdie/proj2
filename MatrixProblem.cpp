@@ -14,6 +14,7 @@ MatrixProblem::MatrixProblem(vector<vector<State<vector<int>> *>> matrix1, State
     this->verticalBound = matrix1.size() - 1;
     vector<int> p = root->getState();
     matrix[p[0]][p[1]]->setHasVisited();
+    matrix[p[0]][p[1]]->setpathCost(root->getCost());
 }
 
 
@@ -83,19 +84,6 @@ vector<State<vector<int>> *> MatrixProblem:: getAllPossibleStates(State<vector<i
             matrix[x+1][y]->setHasVisited();
             states.push_back(matrix[x+1][y]);
         }
-//        newX = x + 1;
-//        newY = y;
-//        newPoint.push_back(newX);
-//        newPoint.push_back(newY);
-//        State<vector<int>> *newStateRight = new State<vector<int>>(newPoint, 9);
-//        newStateRight->setcameFrom(s);
-//        newStateRight->setCost(matrix[newX][newY]->getCost());
-//        newPoint.pop_back();
-//        newPoint.pop_back();
-//        if(newStateRight->getHasVisited() == false) {
-//            newStateRight->setHasVisited();
-//            states.push_back(newStateRight);
-//        }
     }
 
     if (canWeStepThere(x, y + 1)) {
@@ -103,19 +91,6 @@ vector<State<vector<int>> *> MatrixProblem:: getAllPossibleStates(State<vector<i
             matrix[x][y+1]->setHasVisited();
             states.push_back(matrix[x][y+1]);
         }
-//        newX = x;
-//        newY = y + 1;
-//        newPoint.push_back(newX);
-//        newPoint.push_back(newY);
-//        auto newStateDown = new State<vector<int>>(newPoint, 6);
-//        newStateDown->setcameFrom(s);
-//        newStateDown->setCost(matrix[newX][newY]->getCost());
-//        newPoint.pop_back();
-//        newPoint.pop_back();
-//        if(newStateDown->getHasVisited() ==  false){
-//            newStateDown->setHasVisited();
-//            states.push_back(newStateDown);
-//        }
     }
 
     if (canWeStepThere(x - 1, y)) {
@@ -123,19 +98,6 @@ vector<State<vector<int>> *> MatrixProblem:: getAllPossibleStates(State<vector<i
             matrix[x-1][y]->setHasVisited();
             states.push_back(matrix[x-1][y]);
         }
-//        newX = x - 1;
-//        newY = y;
-//        newPoint.push_back(newX);
-//        newPoint.push_back(newY);
-//        auto newStateLeft = new State<vector<int>>(newPoint, 9);
-//        newStateLeft->setcameFrom(s);
-//        newStateLeft->setCost(matrix[newX][newY]->getCost());
-//        newPoint.pop_back();
-//        newPoint.pop_back();
-//        if(newStateLeft->getHasVisited() == false) {
-//            newStateLeft->setHasVisited();
-//            states.push_back(newStateLeft);
-//        }
     }
 
     if (canWeStepThere(x, y - 1)) {
@@ -143,28 +105,47 @@ vector<State<vector<int>> *> MatrixProblem:: getAllPossibleStates(State<vector<i
             matrix[x][y-1]->setHasVisited();
             states.push_back(matrix[x][y-1]);
         }
-//        newX = x;
-//        newY = y-1;
-//        newPoint.push_back(newX);
-//        newPoint.push_back(newY);
-//        auto newStateUp = new State<vector<int>>(newPoint, 0);
-//        newStateUp->setcameFrom(s);
-//        newStateUp->setCost(matrix[newX][newY]->getCost());
-//        newPoint.pop_back();
-//        newPoint.pop_back();
-//        if(newStateUp->getHasVisited() == false) {
-//            newStateUp->setHasVisited();
-//            states.push_back(newStateUp);
-//        }
-
     }
 
     return states;
 }
 
-ostream &operator<<(ostream &out, const MatrixProblem &c) {
 
+vector<State<vector<int>> *> MatrixProblem:: getAllPossibleStatesAstar(State<vector<int>> *s) {
 
-    return <#initializer#>;
+    vector<State<vector<int>> *> states;
+
+    vector<int> point = s->getState();
+    int x=point[0];
+    int y=point[1];
+
+    int newX;
+    int newY;
+    vector<int> newPoint;
+
+    if (canWeStepThere(x + 1, y)) {
+        if(matrix[x+1][y]->getHasVisited() == false){
+            states.push_back(matrix[x+1][y]);
+        }
+    }
+
+    if (canWeStepThere(x, y + 1)) {
+        if(matrix[x][y+1]->getHasVisited() == false){
+            states.push_back(matrix[x][y+1]);
+        }
+    }
+
+    if (canWeStepThere(x - 1, y)) {
+        if(matrix[x-1][y]->getHasVisited() == false){
+            states.push_back(matrix[x-1][y]);
+        }
+    }
+
+    if (canWeStepThere(x, y - 1)) {
+        if(matrix[x][y-1]->getHasVisited() == false){
+            states.push_back(matrix[x][y-1]);
+        }
+    }
+
+    return states;
 }
-

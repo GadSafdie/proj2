@@ -49,17 +49,17 @@ public:
     }
 
 
-    void exit() {
-        WriteFile *write;
-        typename ::map<P, S>::iterator iterator;
-        P first;
-        S second;
-        for (iterator = this->cacheMap.begin(); iterator != this->cacheMap.end(); ++iterator) {
-            first = iterator->first;
-            second = iterator->second;
-            write->writeFileCacheManager(first, second);
-        }
-    }
+//    void exit() {
+//        WriteFile *write;
+//        typename ::map<P, S>::iterator iterator;
+//        P first;
+//        S second;
+//        for (iterator = this->cacheMap.begin(); iterator != this->cacheMap.end(); ++iterator) {
+//            first = iterator->first;
+//            second = iterator->second;
+//            write->writeFileCacheManager(first, second);
+//        }
+//    }
 
 };
 

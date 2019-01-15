@@ -90,6 +90,10 @@ public:
         return evaluatedNodes;
     }
 
+    void setNumberOfNodesEvaluated(int nodes){
+        this->evaluatedNodes = nodes;
+    }
+
 };
 
 #endif //PROJ2_SEARCHER_H

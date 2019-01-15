@@ -18,6 +18,7 @@ class BFS : public Searcher<T> {
 
 public:
     string search(Searchable<T> *searchable) {
+        this->evaluatedNodes = 0;
         vector<State<T>*> path;
         unordered_set<State<T>*> closed;
         State<T> *goal = searchable->getGoalState();

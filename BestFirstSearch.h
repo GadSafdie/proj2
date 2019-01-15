@@ -16,6 +16,7 @@ class BestFirstSearch : public Searcher<T> {
 public:
 
     string search(Searchable<T> *searchable) { // Searcher's abstract method overriding
+        this->evaluatedNodes = 0;
         this->openList.push(searchable->getInitalState());// inherited from Searcher
         searchable->getInitalState()->setHasVisited();
         vector<State<T>*> path;
@@ -55,6 +56,7 @@ public:
         if(solution == ""){
             solution = "-1";
         }
+
         return solution;
     }
 

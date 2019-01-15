@@ -16,9 +16,13 @@ using namespace std;
 
 
 void WriteFile::writeFileCacheManager(MatrixProblem* first, string second) {
-    ofstream myfile;
-    myfile.open("info.txt", ofstream::app);
-    myfile << first <<'\n';
-    myfile << second << '\n';
-    myfile.close();
+    ofstream myfile ("example.txt");
+    if (myfile.is_open())
+    {
+        myfile << *first;
+        myfile << second;
+        myfile.close();
+    }
+    else cout << "Unable to open file";
+
 }
