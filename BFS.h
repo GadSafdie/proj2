@@ -40,8 +40,10 @@ public:
             vector<State<T>*> successors = searchable->getAllPossibleStates(n);
             it = successors.begin();
             for (; it != successors.end(); ++it) {
-                    (*it)->setcameFrom(n);
-                    this->pushToOpenList(*it);
+                double currPath = n->getpathCost() + (*it)->getCost();
+                (*it)->setcameFrom(n);
+                (*it)->setpathCost(currPath);
+                this->pushToOpenList(*it);
                 }
             }
 

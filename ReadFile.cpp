@@ -144,20 +144,21 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
                 }
                 counter++;
                 if (counter == 3) {
-                    flagDimension = 0;
                     returnn.insert(std::make_pair(matrixProblem, solution));
-                    lineCounter = 0;
-                    flag = 0;
-                    matrixFlag = 1;
                     point.clear();
                     cost = "";
                     first = "";
                     second = "";
                     solution = "";
+                    matrix.clear();
+                    flagDimension = 0;
+                    lineCounter = 0;
+                    flag = 0;
+                    matrixFlag = 1;
                     x = 0;
                     counter = 0;
                     flag11 = 0;
-                    matrix.clear();
+                    dimension.clear();
                 }
 //                }
             }

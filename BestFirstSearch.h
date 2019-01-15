@@ -18,6 +18,7 @@ public:
     string search(Searchable<T> *searchable) { // Searcher's abstract method overriding
         this->evaluatedNodes = 0;
         this->openList.push(searchable->getInitalState());// inherited from Searcher
+        this->evaluatedNodes++;
         searchable->getInitalState()->setHasVisited();
         vector<State<T>*> path;
         unordered_set<State<T>*> closed;
@@ -44,7 +45,10 @@ public:
                     temp->setpathCost(currPath);
                     this->pushToOpenList(temp);
                 } else if (currPath < temp->getpathCost()) {
-                    if (!this->contains(temp)) {
+                    if (!this->contains(temp)){
+                        if(temp->getCost() == -1) {
+                            cout << "gadifff" << endl;
+                        }
                         this->openList.push(temp);
                     } else {
                         this->updatePriority(temp,n);

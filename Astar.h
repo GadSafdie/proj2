@@ -11,9 +11,8 @@ using namespace std;
 
 template <class T>
 class AStar:public Searcher<T>{
-    int nodeEleveted = 0 ;
     vector<State<T>*> openList;
-    
+
     string search(Searchable<T> *searchable){
         int k= 0 ;
         vector<State<T>*> closeList;
@@ -30,7 +29,7 @@ class AStar:public Searcher<T>{
             current->setHasVisited();
 
             closeList.push_back(current);
-            nodeEleveted++;
+            this->evaluatedNodes++;
             //end of the algorithm
             if(current->getState() == goal->getState()){
                 break;
@@ -61,7 +60,6 @@ class AStar:public Searcher<T>{
             }
         }
         vector<State<T>*> path = searchable->backtrace(searchable->getGoalState());
-        this->setNumberOfNodesEvaluated(nodeEleveted);
         string solution =  searchable->getDirections(path);
         if(solution == ""){
            searchable->getGoalState()->setpathCost(-1);

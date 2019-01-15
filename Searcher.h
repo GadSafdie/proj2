@@ -27,14 +27,13 @@ class Searcher : public ISearcher<T> {
 
 protected:
     priority_queue<State<T>*, vector<State<T>*>, Compere> openList;
-    int evaluatedNodes;
+    int evaluatedNodes = 0;
 
 public:
 
     priority_queue<State<T>*, vector<State<T>*>,Compere> getOpenList() {
         return openList;
     }
-
 
     State<T>* popOpenList() {
         State<T>* s = openList.top();

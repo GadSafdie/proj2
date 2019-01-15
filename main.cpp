@@ -30,35 +30,83 @@ int main(int argc, char *argv[]) {
     ReadFile *readFile;
     map<MatrixProblem *, string> myMap;
     myMap = readFile->ReadFileCacheManager();
-
-    cout << "gad" << endl;
-
-    MatrixProblem *ma = myMap.begin()->first;
-    ISearcher<vector<int>> *one = new AStar<vector<int>>();
-
-    string h = one->search(ma);
-    int x = one->getNumberOfNodesEvaluated();
-
-    int y = ma->getGoalState()->getpathCost();
-
-    string gadi = myMap.find(ma)->second;
-    WriteFile *hezi = new WriteFile();
-    hezi->writeFileCacheManager(ma, gadi);
-    MatrixProblem *rrr;
-    // show content:
-    for (std::map<MatrixProblem *, string>::iterator it = myMap.begin(); it != myMap.end(); ++it){
-        rrr = it->first;
-        gadi = it->second;
+    map<MatrixProblem *, string>::iterator i;
+//    cout<<"Best First Serach:"<<endl;
+    for (i = myMap.begin(); i != myMap.end(); ++i) {
+        MatrixProblem *ma = i->first;
+        ISearcher<vector<int>> *one = new BestFirstSearch<vector<int>>();
+        string h = one->search(ma);
+        int x = one->getNumberOfNodesEvaluated();
+        int y = ma->getGoalState()->getpathCost();
+        cout<<y<<","<<x<<endl;
     }
-    hezi->writeFileCacheManager(rrr, gadi);
-    if(*ma == *rrr){
-        cout<<"ennnn"<<endl;
+    ReadFile *readFile1;
+    map<MatrixProblem *, string> myMap1;
+    myMap1 = readFile1->ReadFileCacheManager();
+    map<MatrixProblem *, string>::iterator i1;
+    cout<<"DFS:"<<endl;
+    for (i1 = myMap1.begin(); i1 != myMap1.end(); ++i1) {
+        MatrixProblem *ma = i1->first;
+        ISearcher<vector<int>> *one = new DFS<vector<int>>();
+        string h = one->search(ma);
+        int x = one->getNumberOfNodesEvaluated();
+        int y = ma->getGoalState()->getpathCost();
+        cout<<y<<","<<x<<endl;
+    }
+    ReadFile *readFile2;
+    map<MatrixProblem *, string> myMap2;
+    myMap2 = readFile2->ReadFileCacheManager();
+    map<MatrixProblem *, string>::iterator i2;
+    cout<<"BFS:"<<endl;
+    for (i2 = myMap2.begin(); i2 != myMap2.end(); ++i2) {
+        MatrixProblem *ma = i2->first;
+        ISearcher<vector<int>> *one = new BFS<vector<int>>();
+        string h = one->search(ma);
+        int x = one->getNumberOfNodesEvaluated();
+        int y = ma->getGoalState()->getpathCost();
+        cout<<y<<","<<x<<endl;
+    }
+    ReadFile *readFile3;
+    map<MatrixProblem *, string> myMap3;
+    myMap3 = readFile3->ReadFileCacheManager();
+    map<MatrixProblem *, string>::iterator i3;
+    cout<<"ASTAR:"<<endl;
+    for (i3 = myMap3.begin(); i3 != myMap3.end(); ++i3) {
+        MatrixProblem *ma = i3->first;
+        ISearcher<vector<int>> *one = new AStar<vector<int>>();
+        string h = one->search(ma);
+        int x = one->getNumberOfNodesEvaluated();
+        int y = ma->getGoalState()->getpathCost();
+        cout<<y<<","<<x<<endl;
     }
 
-    cout<<x<<endl;
-    cout<<y<<endl;
-    cout<<h<<endl;
 
+
+
+
+//    cout << "gad" << endl;
+//
+//
+//
+//    string h = one->search(ma);
+//
+//
+//    string gadi = myMap.find(ma)->second;
+//    hezi->writeFileCacheManager(ma, gadi);
+//    MatrixProblem *rrr;
+//    // show content:
+//    for (std::map<MatrixProblem *, string>::iterator it = myMap.begin(); it != myMap.end(); ++it){
+//        rrr = it->first;
+//        gadi = it->second;
+//    }
+//    hezi->writeFileCacheManager(rrr, gadi);
+//    if(*ma == *rrr){
+//        cout<<"ennnn"<<endl;
+//    }
+//
+//
+//    cout<<h<<endl;
+//
 
 
 

@@ -16,7 +16,7 @@ class State {
     double cost;
     State<T>* camefrom;
     double pathCost;
-    bool hasVisted;
+    bool hasVisted = false;
 
 
 
@@ -85,6 +85,7 @@ public:
     bool operator == (const State<T>* &b) const{
         return this->PathCost == b->PathCost;
     }
+
 
     bool operator()(const State<T>* left , const State<T>* right){
         return left->getPathCost()>right->getPathCost();

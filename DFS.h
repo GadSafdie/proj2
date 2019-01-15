@@ -41,8 +41,10 @@ public:
             vector<State<T>*> checkIfCanGo = searchable->getAllPossibleStates(current);
             it = checkIfCanGo.begin();
             for(; it!= checkIfCanGo.end() ;++it){
-                State<T>* temp = *it;
+                    State<T>* temp = *it;
+                    double currPath = current->getpathCost() + temp->getCost();
                     temp->setcameFrom(current);
+                    temp->setpathCost(currPath);
                     stack.push(temp);
             }
         }

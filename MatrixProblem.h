@@ -78,12 +78,14 @@ public:
         if (horizonBound != b.gethorizonBound() || verticalBound != b.getverticalBound()) {
             return false;
         }
-        if (goal != b.getGoalState() || root != b.getInitalState()) {
+        vector<int> goalP = b.getGoalState()->getState();
+        vector<int> rootP = b.getInitalState()->getState();
+        if (!(goal->getState() == b.getMatrix()[goalP[0]][goalP[1]]->getState() && root->getState() == b.getMatrix()[rootP[0]][rootP[1]]->getState())) {
             return false;
         }
         for (int i = 0; i <= b.gethorizonBound(); ++i) {
             for (int j = 0; j <= b.getverticalBound(); ++j) {
-                if (matrix[i][j] != b.getMatrix()[i][j])
+                if (matrix[i][j]->getState() != b.getMatrix()[i][j]->getState())
                     return false;
             }
         }
