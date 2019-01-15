@@ -49,7 +49,7 @@ public:
         vector<State<T>*> path = searchable->backtrace(current);
         string solution =  searchable->getDirections(path);
         if(solution == ""){
-            solution = "-1";
+            searchable->getGoalState()->setpathCost(-1);
         }
         return solution;
     }

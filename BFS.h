@@ -44,9 +44,10 @@ public:
                     this->pushToOpenList(*it);
                 }
             }
+
         string newPath = searchable->getDirections(path);
         if(newPath == ""){
-            newPath = "-1";
+            searchable->getGoalState()->setpathCost(-1);
         }
         return newPath;
 

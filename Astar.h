@@ -64,7 +64,7 @@ class AStar:public Searcher<T>{
         this->setNumberOfNodesEvaluated(nodeEleveted);
         string solution =  searchable->getDirections(path);
         if(solution == ""){
-            solution = "-1";
+           searchable->getGoalState()->setpathCost(-1);
         }
         return solution;
     }
