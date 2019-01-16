@@ -25,7 +25,7 @@ public:
         this->flag = 0;
     }
 
-    bool isThereSolution(string porblem) {
+    bool isThereSolution(P porblem) {
         if (flag == 0) {
             ReadFile *readFile;
             cacheMap = readFile->ReadFileCacheManager();
