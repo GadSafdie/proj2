@@ -18,6 +18,7 @@ template<class P, class S>
 class FileCacheManager : public CacheManager<P, S> {
     map<P, S> cacheMap;
     int flag;
+    string ans;
 
 public:
     FileCacheManager() {
@@ -30,16 +31,19 @@ public:
             cacheMap = readFile->ReadFileCacheManager();
             flag = 1;
         }
-        if (cacheMap.find(porblem) == cacheMap.end()) {
-            return false;
-        } else {
-            return true;
+        std::map<MatrixProblem*, string>::iterator it;
+        for (it=cacheMap.begin(); it!=cacheMap.end(); ++it){
+            MatrixProblem* temp = it->first;
+            if(*porblem == *temp) {
+                ans = it->second;
+                return true;
+            }
         }
-
+        return false;
     }
 
     virtual string getSolution(P porblem) {
-        return cacheMap.find(porblem)->second;
+        return ans;
     }
 
     virtual void addSolution(S s, P porblem) {
