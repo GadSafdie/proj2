@@ -92,6 +92,14 @@ public:
         return left->getPathCost()>right->getPathCost();
     }
 
+
+    virtual ~State() {
+        //delete(this->state);
+        if(this->camefrom!= NULL) {
+            delete (this->camefrom);
+        }
+    }
+
 };
 
 

@@ -54,6 +54,9 @@ public:
         return path;
     }
 
+    virtual ~Searchable() = default;
+
+
 
 
 

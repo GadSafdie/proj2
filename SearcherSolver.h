@@ -19,6 +19,9 @@ public:
     SearcherSolver(Searcher<vector<int>> *searcher) : searcher(searcher) {}
 
     string solve(Searchable<vector<int>> *point) override;
+    virtual ~SearcherSolver() {
+
+    }
 
 };
 

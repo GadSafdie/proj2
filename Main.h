@@ -39,11 +39,13 @@ public:
 
 //        delete server;
 //        delete solver;
-//        delete cacheManager;
 //        delete clientHandler;
 
     }
+
 };
+
+
 
 
 #endif //PROJ2_MAIN_H

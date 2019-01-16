@@ -46,6 +46,12 @@ public:
         return this->cm;
     }
 
+    virtual ~MyClientHandler(){
+//        delete (this->solver);
+//        delete (this->cm);
+    }
+
+
 };
 
 #endif //PROJ2_MYCLIENTHANDLER_H

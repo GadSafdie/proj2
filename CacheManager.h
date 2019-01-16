@@ -16,6 +16,8 @@ public:
     virtual bool isThereSolution(P porblem) = 0;
     virtual S getSolution(P porblem) = 0;
     virtual void addSolution(S s,P porblem) = 0;
+    virtual ~CacheManager()= default;
+
 
 };
 

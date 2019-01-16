@@ -93,6 +93,9 @@ public:
         this->evaluatedNodes = nodes;
     }
 
+    virtual ~Searcher()= default;
+
+
 };
 
 #endif //PROJ2_SEARCHER_H

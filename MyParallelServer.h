@@ -21,6 +21,8 @@ public:
     virtual void stop();
     static void clientQuque(int newsockfd, ClientHandler* c);
     virtual void handleClient(int newsockfd){};
+    virtual ~MyParallelServer()= default;
+
 };
 
 

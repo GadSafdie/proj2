@@ -92,6 +92,14 @@ public:
         return true;
     }
 
+
+    virtual ~MatrixProblem() {
+        for (int i = 0; i < this->matrix.size(); ++i) {
+            this->matrix[i].clear();
+        }
+    }
+
+
 };
 
 
