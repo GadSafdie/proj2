@@ -17,6 +17,7 @@
 using namespace std;
 
 class MyClientHandler : public ClientHandler {
+    string tempStr="";
     Solver<Searchable<vector<int>> *, string>* solver;
     CacheManager<MatrixProblem*,string> *cm = new FileCacheManager<MatrixProblem*,string>();
     int flag;

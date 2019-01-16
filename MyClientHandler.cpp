@@ -44,9 +44,29 @@ void MyClientHandler::handleClient(int newsockfd) {
 
         int size = strlen(buff);
         string str = "";
-
+        string str1 = "";
+        str=str+tempStr;
+        tempStr="";
         for (int i = 0; i < size - 2; ++i) {
             str.push_back(buff[i]);
+        }
+
+        for (char j : str) {
+            if ('\r' == j) {
+                if (str.size() > j + 1) {
+                    if ('\n' == j + 1) {
+                        for (int i = j; i < str.size(); ++i) {
+                            tempStr = tempStr + str[i];
+                        }
+                        break;
+                    }
+                }
+
+
+            } else {
+                str1 = str1 + str[j];
+            }
+
         }
 
 
@@ -61,8 +81,8 @@ void MyClientHandler::handleClient(int newsockfd) {
                         int temp1 = static_cast<int>(tempMatrix[i][1]->getCost());//double to string
                         double cost = static_cast<int>(tempMatrix[temp][temp1]->getCost());//double to string
                         vector<int> point;
-                        point.push_back(temp1);
                         point.push_back(temp);
+                        point.push_back(temp1);
                         stateRoot = new State<vector<int>>(point, cost);
 
 //                        vector<int>* vec = new vector<int>({temp, temp1});
@@ -74,8 +94,8 @@ void MyClientHandler::handleClient(int newsockfd) {
                         int temp1 = static_cast<int>(tempMatrix[i][1]->getCost());//double to string
                         double cost = static_cast<int>(tempMatrix[temp][temp1]->getCost());//double to string
                         vector<int> point;
-                        point.push_back(temp1);
                         point.push_back(temp);
+                        point.push_back(temp1);
                         stateGoal = new State<vector<int>>(point, cost);
 
                     }
@@ -93,7 +113,6 @@ void MyClientHandler::handleClient(int newsockfd) {
                 send(newsockfd, charKochavitName, h.size(), 0);
             } else {
 
-                ISearcher<vector<int>> *one = new BFS<vector<int>>();
 
                 string h = solver->solve(mp);
                 cm->addSolution(h, mp);
