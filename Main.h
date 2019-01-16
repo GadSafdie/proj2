@@ -31,11 +31,11 @@ public:
 //            MyClientHandler(Solver<MatrixProblem*,string> &s, CacheManager<MatrixProblem*,string> &cm1) {
 
 
-
         auto server = new MyParallelServer();
-        Solver<Searchable<vector<int>> *, string>* solver = new SearcherSolver(new AStar<vector<int>>());
-        FileCacheManager<MatrixProblem *, string>* fcm;
-        auto clientHandler = new MyClientHandler(solver, fcm);
+        Solver<Searchable<vector<int>> *, string> *solver = new SearcherSolver(new AStar<vector<int>>());
+        CacheManager<MatrixProblem *, string> *cm = new FileCacheManager<MatrixProblem *, string>();
+
+        auto clientHandler = new MyClientHandler(solver, cm);
         server->open(port, clientHandler);
 
 //        delete server;
