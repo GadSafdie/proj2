@@ -17,7 +17,7 @@ using namespace std;
 
 void WriteFile::writeFileCacheManager(MatrixProblem* first, string second) {
     ofstream myfile;
-    myfile.open("example.txt", ofstream::app);
+    myfile.open("info.txt", ofstream::app);
         myfile << *first;
         myfile << second;
 

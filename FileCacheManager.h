@@ -46,12 +46,18 @@ public:
         return ans;
     }
 
+    map<P, S> getCacheMap(){
+        return cacheMap;
+    }
+
+
     virtual void addSolution(S s, P porblem) {
+        s=s+'\n';
         cacheMap.insert(std::pair<P, S>(porblem, s));
     }
 
 
-//    void exit() {
+    void exit() {
 //        WriteFile *write;
 //        typename ::map<P, S>::iterator iterator;
 //        P first;
@@ -61,7 +67,7 @@ public:
 //            second = iterator->second;
 //            write->writeFileCacheManager(first, second);
 //        }
-//    }
+    }
 
 };
 

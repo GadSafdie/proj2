@@ -17,22 +17,23 @@
 using namespace std;
 
 #include "MyParallelServer.h"
+#include "MyClientHandler.h"
 
 void MyParallelServer::exit11(ClientHandler *clientHandler) {
-//    WriteFile *write;
-    map<string, string>::const_iterator iterator;
-    string first;
+    WriteFile *write;
+    map<MatrixProblem *, string>::const_iterator iterator;
+    MatrixProblem * first;
     string second;
-//    MyTestClientHandler *mtch = dynamic_cast<MyTestClientHandler *>(clientHandler);
-//    CacheManager<string, string> *cm1 = mtch->getCacheManager();
-//    FileCacheManager<string, string> *fileCacheManager = dynamic_cast<FileCacheManager<string, string> *>(cm1);
-//    map<string,string> cacheMap = fileCacheManager->getCacheMap();
-//    for (iterator =  cacheMap.begin(); iterator != cacheMap.end(); ++iterator) {
-//        first = iterator->first;
-//        second = iterator->second;
-//        write->writeFileCacheManager(first,second);
-//    }
-//    fileCacheManager->exit();
+    MyClientHandler *mtch = dynamic_cast<MyClientHandler *>(clientHandler);
+    CacheManager<MatrixProblem *, string> *cm1 = mtch->getCacheManager();
+    FileCacheManager<MatrixProblem *, string> *fileCacheManager = dynamic_cast<FileCacheManager<MatrixProblem *, string> *>(cm1);
+    map<MatrixProblem *, string> cacheMap = fileCacheManager->getCacheMap();
+    for (iterator = cacheMap.begin(); iterator != cacheMap.end(); ++iterator) {
+        first = iterator->first;
+        second = iterator->second;
+        write->writeFileCacheManager(first, second);
+    }
+    fileCacheManager->exit();
 
 }
 
