@@ -165,7 +165,7 @@ map<MatrixProblem *, string> ReadFile::ReadFileCacheManager() {
         }
     }
     infile.close();
-//    remove("info.txt");
+    remove("info.txt");
 
     return returnn;
 }
