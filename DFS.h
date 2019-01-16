@@ -32,6 +32,7 @@ public:
             stack.pop();
             this->evaluatedNodes+=1;
             if(current->getState() == goal->getState()){
+                *current = *goal;
                 break;
             }
             if (!current->getHasVisited())

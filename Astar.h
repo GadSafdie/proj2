@@ -32,7 +32,13 @@ class AStar:public Searcher<T>{
             this->evaluatedNodes++;
             //end of the algorithm
             if(current->getState() == goal->getState()){
-                break;
+                *goal = *current;
+                vector<State<T>*> path = searchable->backtrace(current);
+                string solution =  searchable->getDirections(path);
+                if(solution == ""){
+                    searchable->getGoalState()->setpathCost(-1);
+                }
+                return solution;
             }
             vector<State<T>*> neighbors = searchable->getAllPossibleStatesAstar(current);
             while (!neighbors.empty()){
@@ -59,12 +65,7 @@ class AStar:public Searcher<T>{
                 temp->setcameFrom(current);
             }
         }
-        vector<State<T>*> path = searchable->backtrace(searchable->getGoalState());
-        string solution =  searchable->getDirections(path);
-        if(solution == ""){
-           searchable->getGoalState()->setpathCost(-1);
-        }
-        return solution;
+        return "-1";
     }
 
     State<T>* valowest(State<T>* goal) {

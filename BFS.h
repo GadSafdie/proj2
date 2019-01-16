@@ -30,6 +30,7 @@ public:
         while (!this->getOpenList().empty()) {
             State<T> *n = this->popOpenList();
             if (n->getState() == goal->getState()) {
+                *goal = *n;
                 closed.insert(goal);
 //                cout << n->getCost() << " ";
                 path = searchable->backtrace(n);

@@ -74,6 +74,7 @@ public:
 
     T setState(T* s){
         state = s;
+        return state;
     }
 
     bool operator < (const State<T>* &b) const{

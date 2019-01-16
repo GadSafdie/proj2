@@ -14,6 +14,9 @@
 #include "FileCacheManager.h"
 #include "State.h"
 #include "MatrixProblem.h"
+#include "ISearcher.h"
+#include "Astar.h"
+#include "BFS.h"
 
 using namespace std;
 
@@ -23,8 +26,10 @@ void MyClientHandler::handleClient(int newsockfd) {
     bool end = false;
     vector<vector<State<vector<int>> *>> tempMatrix;
     vector<vector<State<vector<int>> *>> matrix;
-    string root = "";
-    string goal = "";
+    string root;
+    string goal;
+    State<vector<int>>* stateRoot;
+    State<vector<int>>* stateGoal;
 
 
     while (end != true) {
@@ -39,6 +44,7 @@ void MyClientHandler::handleClient(int newsockfd) {
 
         int size = strlen(buff);
         string str = "";
+
         for (int i = 0; i < size - 2; ++i) {
             str.push_back(buff[i]);
         }
@@ -51,17 +57,32 @@ void MyClientHandler::handleClient(int newsockfd) {
                     matrix.push_back(tempMatrix[i]);
                 } else {
                     if (check == 0) {
-                        int temp = tempMatrix[i][0]->getCost();//double to string
-                        root = to_string(temp);
-                        check = 1;
+                        int temp = static_cast<int>(tempMatrix[i][0]->getCost());//double to string
+                        int temp1 = static_cast<int>(tempMatrix[i][1]->getCost());//double to string
+                        double cost = static_cast<int>(tempMatrix[temp][temp1]->getCost());//double to string
+                        vector<int> point;
+                        point.push_back(temp1);
+                        point.push_back(temp);
+                        stateRoot = new State<vector<int>>(point, cost);
+
+//                        vector<int>* vec = new vector<int>({temp, temp1});
+//                        stateRoot->setState(vec);
+//                        stateRoot->setCost(tempMatrix[temp][temp1]->getCost());
+                        check =1;
                     } else {
-                        int temp = ((int)tempMatrix[i][0]->getCost());//double to string
-                        goal = to_string(temp);
+                        int temp = static_cast<int>(tempMatrix[i][0]->getCost());//double to string
+                        int temp1 = static_cast<int>(tempMatrix[i][1]->getCost());//double to string
+                        double cost = static_cast<int>(tempMatrix[temp][temp1]->getCost());//double to string
+                        vector<int> point;
+                        point.push_back(temp1);
+                        point.push_back(temp);
+                        stateGoal = new State<vector<int>>(point, cost);
+
                     }
 
                 }
             }
-            MatrixProblem* mp = new MatrixProblem(matrix, findStatePoint(root), findStatePoint(goal));
+            MatrixProblem *mp = new MatrixProblem(matrix, stateRoot, stateGoal);
             //we need to check if this matrix already exist in our files if not we will pass
             // the matrix to the solver - and getting back the path UP/LEFT/DOEN/RIGHT
             if (cm->isThereSolution(mp)) {
@@ -71,6 +92,10 @@ void MyClientHandler::handleClient(int newsockfd) {
                 const char *charKochavitName = h.c_str(); // convert the string to char *
                 send(newsockfd, charKochavitName, h.size(), 0);
             } else {
+
+                        ISearcher<vector<int>> *one = new BFS<vector<int>>();
+//                        string h = one->search(mp);
+
                 string h = solver->solve(mp);
                 cm->addSolution(h, mp);
                 h = h + "\n";
@@ -124,7 +149,7 @@ vector<State<vector<int>> *> MyClientHandler::makeTheStateFromLine(string str) {
             newString = "";
         }
     }
-    if(newString != ""){
+    if (newString != "") {
         returnVector.push_back(makeOneStateFromLine(newString, x));
     }
     this->flag++;
@@ -134,8 +159,8 @@ vector<State<vector<int>> *> MyClientHandler::makeTheStateFromLine(string str) {
 State<vector<int>> *MyClientHandler::makeOneStateFromLine(string str, int x) {
     double cost = stod(str);
     vector<int> point;
-    point.push_back(x);
     point.push_back(flag);
+    point.push_back(x);
     State<vector<int>> *returnState = new State<vector<int>>(point, cost);
     myMap.insert(std::make_pair(point, returnState));
     point.clear();
@@ -149,17 +174,18 @@ State<vector<int>> *MyClientHandler::findStatePoint(string str) {
     for (int i = 0; i < str.size(); ++i) {
         if (str[i] != ',') {
             if (localFlag == 0) {
-                x = x + str[i];
-            } else {
                 y = y + str[i];
+            } else {
+
+                x = x + str[i];
             }
         } else {
             localFlag = 1;
         }
     }
     vector<int> point;
-    point.push_back(atoi(x.c_str()));
     point.push_back(atoi(y.c_str()));
+    point.push_back(atoi(x.c_str()));
 //std::map<vector<int>, State<vector<int>> *>::iterator
     auto it = myMap.find(point);
     if (it != myMap.end()) {

@@ -28,6 +28,7 @@ public:
             closed.insert(n);
             State<T>* goal = searchable->getGoalState();
             if (n->getState() == goal->getState()){
+                *goal = *n;
                 path = searchable->backtrace(n);
                 break;
             }
