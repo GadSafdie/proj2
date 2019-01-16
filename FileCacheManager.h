@@ -11,6 +11,7 @@
 #include "WriteFile.h"
 #include "MyTestClientHandler.h"
 #include "ReadFile.h"
+
 using namespace std;
 
 template<class P, class S>
@@ -29,13 +30,12 @@ public:
             cacheMap = readFile->ReadFileCacheManager();
             flag = 1;
         }
-
-        for (typename ::map<P, S>::iterator it = cacheMap.begin(); it != cacheMap.end(); ++it) {
-            if (it == cacheMap.end()) {
-                return true;
-            }
+        if (cacheMap.find(porblem) == cacheMap.end()) {
+            return false;
+        } else {
+            return true;
         }
-        return false;
+
     }
 
     virtual string getSolution(P porblem) {
