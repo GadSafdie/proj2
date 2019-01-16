@@ -23,20 +23,20 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 //
-    ReadFile *readFile3;
-    map<MatrixProblem *, string> myMap3;
-    myMap3 = readFile3->ReadFileCacheManager();
-    map<MatrixProblem *, string>::iterator i3;
-    cout<<"ASTAR:"<<endl;
-    for (i3 = myMap3.begin(); i3 != myMap3.end(); ++i3) {
-        MatrixProblem *ma = i3->first;
-        ISearcher<vector<int>> *one = new AStar<vector<int>>();
-        string h = one->search(ma);
-        int x = one->getNumberOfNodesEvaluated();
-        int y = ma->getGoalState()->getpathCost();
-        cout<<y<<","<<x<<endl;
-        cout<<h<<endl;
-    }
+//    ReadFile *readFile3;
+//    map<MatrixProblem *, string> myMap3;
+//    myMap3 = readFile3->ReadFileCacheManager();
+//    map<MatrixProblem *, string>::iterator i3;
+//    cout<<"ASTAR:"<<endl;
+//    for (i3 = myMap3.begin(); i3 != myMap3.end(); ++i3) {
+//        MatrixProblem *ma = i3->first;
+//        ISearcher<vector<int>> *one = new AStar<vector<int>>();
+//        string h = one->search(ma);
+//        int x = one->getNumberOfNodesEvaluated();
+//        int y = ma->getGoalState()->getpathCost();
+//        cout<<y<<","<<x<<endl;
+//        cout<<h<<endl;
+//    }
 
     char *port1 = argv[1];
     int port = atoi(port1);

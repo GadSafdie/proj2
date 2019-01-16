@@ -34,7 +34,6 @@ public:
         auto server = new MyParallelServer();
         Solver<Searchable<vector<int>> *, string> *solver = new SearcherSolver(new AStar<vector<int>>());
         CacheManager<MatrixProblem *, string> *cm = new FileCacheManager<MatrixProblem *, string>();
-
         auto clientHandler = new MyClientHandler(solver, cm);
         server->open(port, clientHandler);
 
