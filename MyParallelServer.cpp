@@ -23,9 +23,9 @@ void MyParallelServer::exit11(ClientHandler *clientHandler) {
     map<string, string>::const_iterator iterator;
     string first;
     string second;
-    MyTestClientHandler *mtch = dynamic_cast<MyTestClientHandler *>(clientHandler);
-    CacheManager<string, string> *cm1 = mtch->getCacheManager();
-    FileCacheManager<string, string> *fileCacheManager = dynamic_cast<FileCacheManager<string, string> *>(cm1);
+//    MyTestClientHandler *mtch = dynamic_cast<MyTestClientHandler *>(clientHandler);
+//    CacheManager<string, string> *cm1 = mtch->getCacheManager();
+//    FileCacheManager<string, string> *fileCacheManager = dynamic_cast<FileCacheManager<string, string> *>(cm1);
 //    map<string,string> cacheMap = fileCacheManager->getCacheMap();
 //    for (iterator =  cacheMap.begin(); iterator != cacheMap.end(); ++iterator) {
 //        first = iterator->first;

@@ -25,7 +25,7 @@ class AStar:public Searcher<T>{
 
         while(!this->openList.empty()){
 
-            State<T>* current = this->lowestVal(goal);
+            State<T>* current = this->valowest(goal);
             current->setHasVisited();
 
             closeList.push_back(current);
@@ -67,7 +67,7 @@ class AStar:public Searcher<T>{
         return solution;
     }
 
-    State<T>* lowestVal(State<T>* goal) {
+    State<T>* valowest(State<T>* goal) {
         vector<State<T>*> temp;
 
         State<T>* lowest = openList.back();

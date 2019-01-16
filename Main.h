@@ -34,14 +34,14 @@ public:
 
         auto server = new MyParallelServer();
         Solver<Searchable<vector<int>> *, string>* solver = new SearcherSolver(new AStar<vector<int>>());
-        FileCacheManager<MatrixProblem *, string> fcm;
+        FileCacheManager<MatrixProblem *, string>* fcm;
         auto clientHandler = new MyClientHandler(solver, fcm);
         server->open(port, clientHandler);
 
-        delete server;
-        delete solver;
+//        delete server;
+//        delete solver;
 //        delete cacheManager;
-        delete clientHandler;
+//        delete clientHandler;
 
     }
 };

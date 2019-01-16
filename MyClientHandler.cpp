@@ -51,15 +51,17 @@ void MyClientHandler::handleClient(int newsockfd) {
                     matrix.push_back(tempMatrix[i]);
                 } else {
                     if (check == 0) {
-                        root = tempMatrix[i][0]->getCost();//double to string
+                        int temp = tempMatrix[i][0]->getCost();//double to string
+                        root = to_string(temp);
                         check = 1;
                     } else {
-                        goal = tempMatrix[i][0]->getCost();//double to string
+                        int temp = ((int)tempMatrix[i][0]->getCost());//double to string
+                        goal = to_string(temp);
                     }
 
                 }
             }
-            auto mp = new MatrixProblem(matrix, findStatePoint(root), findStatePoint(goal));
+            MatrixProblem* mp = new MatrixProblem(matrix, findStatePoint(root), findStatePoint(goal));
             //we need to check if this matrix already exist in our files if not we will pass
             // the matrix to the solver - and getting back the path UP/LEFT/DOEN/RIGHT
             if (cm->isThereSolution(mp)) {
@@ -119,8 +121,13 @@ vector<State<vector<int>> *> MyClientHandler::makeTheStateFromLine(string str) {
         } else {
             returnVector.push_back(makeOneStateFromLine(newString, x));
             x = x + 1;
+            newString = "";
         }
     }
+    if(newString != ""){
+        returnVector.push_back(makeOneStateFromLine(newString, x));
+    }
+    this->flag++;
     return returnVector;
 }
 
@@ -132,6 +139,7 @@ State<vector<int>> *MyClientHandler::makeOneStateFromLine(string str, int x) {
     State<vector<int>> *returnState = new State<vector<int>>(point, cost);
     myMap.insert(std::make_pair(point, returnState));
     point.clear();
+    return returnState;
 }
 
 State<vector<int>> *MyClientHandler::findStatePoint(string str) {
@@ -150,8 +158,8 @@ State<vector<int>> *MyClientHandler::findStatePoint(string str) {
         }
     }
     vector<int> point;
-    point.push_back(stod(x));
-    point.push_back(stod(y));
+    point.push_back(atoi(x.c_str()));
+    point.push_back(atoi(y.c_str()));
 //std::map<vector<int>, State<vector<int>> *>::iterator
     auto it = myMap.find(point);
     if (it != myMap.end()) {

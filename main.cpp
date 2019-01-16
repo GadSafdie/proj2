@@ -23,11 +23,11 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-//    char* port1 = argv[1];
-//    int port = atoi(port1);
-//    boot::Main* m;
-//    m->main(port);
-//    while (true){}
+    char* port1 = argv[1];
+    int port = atoi(port1);
+    boot::Main* m;
+    m->main(port);
+    while (true){}
 
 
 //    State<std::string>* a = new State<std::string>("A");
@@ -86,11 +86,11 @@ int main(int argc, char *argv[]) {
 //        int y = ma->getGoalState()->getpathCost();
 //        cout<<y<<","<<x<<endl;
 //    }
+//
+//
+//
 
-
-
-
-
+//
 //    cout << "gad" << endl;
 //
 //
@@ -117,12 +117,12 @@ int main(int argc, char *argv[]) {
 
 //        boot::Main m;
 //    *    m.main(argc, argv);
-
-    char* port1 = argv[1];
-    int port = atoi(port1);
-    boot::Main* m;
-    m->main(port);
-    while (true){}
+//
+//    char* port1 = argv[1];
+//    int port = atoi(port1);
+//    boot::Main* m;
+//    m->main(port);
+//    while (true){}
 
 
 

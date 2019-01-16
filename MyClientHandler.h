@@ -12,19 +12,20 @@
 #include "State.h"
 #include "vector"
 #include "MatrixProblem.h"
+#include "FileCacheManager.h"
 
 using namespace std;
 
 class MyClientHandler : public ClientHandler {
     Solver<Searchable<vector<int>> *, string>* solver;
-    CacheManager<MatrixProblem*,string> *cm;
+    CacheManager<MatrixProblem*,string> *cm = new FileCacheManager<MatrixProblem*,string>();
     int flag;
     std::map<vector<int>, State<vector<int>> *> myMap;
 
 public:
-    MyClientHandler(Solver<Searchable<vector<int>> *, string>* s, CacheManager<MatrixProblem*,string> &cm1) {
+    MyClientHandler(Solver<Searchable<vector<int>> *, string>* s, CacheManager<MatrixProblem*,string>* cm1) {
         solver = s;
-        cm = &cm1;
+        cm = cm1;
         flag = 0;
     }
 
