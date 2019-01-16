@@ -28,8 +28,8 @@ void MyClientHandler::handleClient(int newsockfd) {
     vector<vector<State<vector<int>> *>> matrix;
     string root;
     string goal;
-    State<vector<int>>* stateRoot;
-    State<vector<int>>* stateGoal;
+    State<vector<int>> *stateRoot;
+    State<vector<int>> *stateGoal;
 
 
     while (end != true) {
@@ -68,7 +68,7 @@ void MyClientHandler::handleClient(int newsockfd) {
 //                        vector<int>* vec = new vector<int>({temp, temp1});
 //                        stateRoot->setState(vec);
 //                        stateRoot->setCost(tempMatrix[temp][temp1]->getCost());
-                        check =1;
+                        check = 1;
                     } else {
                         int temp = static_cast<int>(tempMatrix[i][0]->getCost());//double to string
                         int temp1 = static_cast<int>(tempMatrix[i][1]->getCost());//double to string
@@ -93,8 +93,7 @@ void MyClientHandler::handleClient(int newsockfd) {
                 send(newsockfd, charKochavitName, h.size(), 0);
             } else {
 
-                        ISearcher<vector<int>> *one = new BFS<vector<int>>();
-//                        string h = one->search(mp);
+                ISearcher<vector<int>> *one = new BFS<vector<int>>();
 
                 string h = solver->solve(mp);
                 cm->addSolution(h, mp);
@@ -102,8 +101,6 @@ void MyClientHandler::handleClient(int newsockfd) {
                 const char *charKochavitName = h.c_str(); // convert the string to char *
                 send(newsockfd, charKochavitName, h.size(), 0);
             }
-//            FileCacheManager* fileCacheManager = dynamic_cast<FileCacheManager*>(this->cm);
-//            fileCacheManager->exit();
             close(newsockfd);
             end = true;
         } else {
@@ -112,23 +109,6 @@ void MyClientHandler::handleClient(int newsockfd) {
             stateVector = makeTheStateFromLine(str);
             tempMatrix.push_back(stateVector);
             stateVector.clear();
-//
-//            } else if (flag < MatrixLinesNumber) {
-//                stateVector = makeTheStateFromLine(str);
-//                matrix.push_back(stateVector);
-//                stateVector.clear();
-//                flag = flag + 1;
-//            } else if (flag == MatrixLinesNumber) {
-//                root = str;
-//                flag = flag + 1;
-//            } else if (flag == MatrixLinesNumber + 1) {
-//                goal = str;
-//                flag = flag + 1;
-//        } else if (flag == MatrixLinesNumber + 2) {
-//
-//        }
-
-
         }
 
     }

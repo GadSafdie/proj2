@@ -11,8 +11,6 @@
 #include "WriteFile.h"
 #include "MyTestClientHandler.h"
 #include "ReadFile.h"
-
-
 using namespace std;
 
 template<class P, class S>

@@ -21,21 +21,17 @@ class MyClientHandler : public ClientHandler {
     CacheManager<MatrixProblem*,string> *cm = new FileCacheManager<MatrixProblem*,string>();
     int flag;
     std::map<vector<int>, State<vector<int>> *> myMap;
-
 public:
     MyClientHandler(Solver<Searchable<vector<int>> *, string>* s, CacheManager<MatrixProblem*,string>* cm1) {
         solver = s;
         cm = cm1;
         flag = 0;
     }
-
     MyClientHandler() {
         flag = 0;
 
     }
-
     vector<State<vector<int>> *> makeTheStateFromLine(string str);
-
     State<vector<int>> *makeOneStateFromLine(string str, int x);
 
     State<vector<int>> *findStatePoint(string str);
